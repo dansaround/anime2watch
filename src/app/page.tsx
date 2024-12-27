@@ -1,7 +1,6 @@
-import { data } from "@/data/mock.json";
+import { data } from "@/data/main.json";
 
-export default function Home() {
+export default function StartPage() {
   const mockData = data.Page.media;
-  console.log(mockData);
   return <div className="">Let's get started</div>;
 }

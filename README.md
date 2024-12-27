@@ -22,9 +22,16 @@ This is a anime library project to showcase the usage of the following stack
 - [x] Create Anilist mockData.
 - [x] Layout.
 - [x] Header
-- [ ] Footer
-- [ ] Cards with basic info (nombre, formato, episodios, categorías, imagen, score y status,).
+- [x] Footer
+- [x] Cards with basic info (nombre, formato, episodios, categorías, imagen, score y status,).
+- [x] Banner section
 - [ ] Pagination.
+
+### 3. Favorites Feature
+
+- [ ] Add favorites **favoritos** (Local Storage).
+- [ ] Show saved favorites.
+- [ ] filter favoritos by status or category.
 
 ### 4. Search
 
@@ -40,34 +47,28 @@ This is a anime library project to showcase the usage of the following stack
 - [ ] Show complete info: nombre, estado, episodios, score, categorías, temporada, studio, y resumen.
 - [ ] Show Image.
 
-### 6. Favorites Feature
-
-- [ ] Add favorites **favoritos** (Local Storage).
-- [ ] Show saved favorites.
-- [ ] filter favoritos by status or category.
-
-### 7. Responsive Design
+### 6. Responsive Design
 
 - [ ] Add animations.
 - [ ] Add responsive
 
-### 8. SEO
+### 7. SEO
 
 - [ ] Implement **SEO**:
   - Add **meta tags** y **Open Graph tags**.
   - Use **Server-Side Rendering** (SSR) or **Static Site Generation** (SSG) feature.
   - SEO friendly routes.
 
-### 9. Validations and Error handling
+### 8. Validations and Error handling
 
 - [ ] Validate user input and API response.
 - [ ] Loading feature and friendly error messages **mensajes informativos**.
 
-### 11. Despliegue
+### 9. Despliegue
 
 - [ ] Desploy on Vercel.
 
-### 12. Documentación
+### 10. Documentación
 
 - [ ] Add documentation
 
