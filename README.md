@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# anime2watch
 
-## Getting Started
+This is a anime library project to showcase the usage of the following stack
 
-First, run the development server:
+- SSR: Nextjs
+- Styles: Tailwind/Shadcn
+- Animations: Framer Motion
+- SEO: Nextjs Meta Tags
+- Login: Clerk
+- API : Apollo GraphQL
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Requirements:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Config
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [x] Create **Next.js** template with **TypeScript**.
+- [x] Add ESLint y Prettier.
+- [x] Add TailwindCSS.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. HomePage
 
-## Learn More
+- [ ] Create Anilist mockData.
+- [ ] Homepage.
+- [ ] Header
+- [ ] Footer
+- [ ] Cards with basic info (nombre, formato, episodios, categorías, imagen, score y status,).
+- [ ] Pagination.
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Search
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ ] Implement search:
+  - Search animes by **nombre**.
+  - Filter by **score**.
+  - Filter by **categoría**.
+  - Filter by **estado**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. DetailPage
 
-## Deploy on Vercel
+- [ ] Send selected anime Id.
+- [ ] Show complete info: nombre, estado, episodios, score, categorías, temporada, studio, y resumen.
+- [ ] Show Image.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 6. Favorites Feature
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Add favorites **favoritos** (Local Storage).
+- [ ] Show saved favorites.
+- [ ] filter favoritos by status or category.
+
+### 7. Responsive Design
+
+- [ ] Add animations.
+- [ ] Add responsive
+
+### 8. SEO
+
+- [ ] Implement **SEO**:
+  - Add **meta tags** y **Open Graph tags**.
+  - Use **Server-Side Rendering** (SSR) or **Static Site Generation** (SSG) feature.
+  - SEO friendly routes.
+
+### 9. Validations and Error handling
+
+- [ ] Validate user input and API response.
+- [ ] Loading feature and friendly error messages **mensajes informativos**.
+
+### 11. Despliegue
+
+- [ ] Desploy on Vercel.
+
+### 12. Documentación
+
+- [ ] Add documentation
+
+## Extra:
+
+- [ ] Login feature using Clerk.
+- [ ] Improve Favorites experience
+- [ ] OpenAI integration for better recomendations.
