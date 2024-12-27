@@ -1,10 +1,12 @@
+"use client";
 import type { Metadata } from "next";
 import { data } from "@/data/main.json";
 import { AnimeProps } from "../home/page";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Banner } from "../components/Banner";
-import { FaStar } from "react-icons/fa";
-import { useState } from "react";
+import StarSelector from "../components/domains/home/StarSelector";
+import GenereSelector from "../components/domains/home/GenereSelector";
+import StatusSelector from "../components/domains/home/StatusSelector";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,7 +51,7 @@ export default function MainLayout({
       <Banner anime={mockData[0]} />
 
       <div className="flex-grow">
-        <div className="grid grid-cols-[1fr_6fr] h-full bg-blue-300">
+        <div className="grid grid-cols-[1.5fr_6fr] h-full bg-blue-300">
           <Sidebar />
           <main className="bg-black w-full overflow-x-hidden border ">
             {children}
@@ -65,30 +67,25 @@ export default function MainLayout({
 
 function Sidebar() {
   return (
-    <aside className="bg-orange-900 w-full h-full flex flex-col pt-10 px-3">
-      <span className="text-xl font-semibold pt-6 pb-2">Busqueda</span>
+    <aside className="bg-gray-700 w-full h-full flex flex-col pt-10 px-3 gap-3">
+      <span className="text-2xl font-semibold pt-6 pb-2">Busqueda</span>
       <input placeholder="Búsqueda" />
-      <span className="text-xl font-semibold pt-6 pb-2">Puntuación</span>
-      <Stars quantity={5} />
-      <Stars quantity={4} />
-      <Stars quantity={3} /> test
-      <Stars quantity={2} />
-      <Stars quantity={1} />
-      <span className="text-xl font-semibold pt-6 pb-2">Género</span>
-      <span className="text-xl font-semibold pt-6 pb-2">Status</span>
-    </aside>
-  );
-}
 
-function Stars({ quantity }: { quantity: number }) {
-  const [selected, setSelected] = useState(0);
-  return (
-    <div className="flex space-x-1">
-      {Array(quantity)
-        .fill(0)
-        .map((_, index) => {
-          return <FaStar key={index} />;
-        })}
-    </div>
+      <span className="text-2xl font-semibold pt-6 pb-2">Filtros</span>
+
+      <StarSelector
+        onSelectStar={(value) => {
+          console.log(value);
+        }}
+      />
+
+      <GenereSelector
+        onSelectGenere={(value) => console.log("GENERE SELECTED : " + value)}
+      />
+
+      <StatusSelector
+        onSelectStatus={(value) => console.log("GENERE SELECTED : " + value)}
+      />
+    </aside>
   );
 }
