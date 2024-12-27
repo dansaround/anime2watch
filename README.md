@@ -19,9 +19,9 @@ This is a anime library project to showcase the usage of the following stack
 
 ### 2. HomePage
 
-- [ ] Create Anilist mockData.
-- [ ] Homepage.
-- [ ] Header
+- [x] Create Anilist mockData.
+- [x] Layout.
+- [x] Header
 - [ ] Footer
 - [ ] Cards with basic info (nombre, formato, episodios, categorías, imagen, score y status,).
 - [ ] Pagination.
