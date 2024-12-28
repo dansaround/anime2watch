@@ -7,6 +7,9 @@ import { Banner } from "../components/Banner";
 import StarSelector from "../components/domains/home/StarSelector";
 import GenereSelector from "../components/domains/home/GenereSelector";
 import StatusSelector from "../components/domains/home/StatusSelector";
+import Link from "next/link";
+import Image from "next/image";
+import Logo from "../assets/logo.png";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,11 +38,13 @@ export default function MainLayout({
       className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col bg-gray-100 relative`}
     >
       <header className="flex bg-black justify-between items-center p-4 border-b-4 border-blue-400">
-        Logo Here
+        <Link href="/home">
+          <Image src={Logo} alt="Logo" width={100} height={30} />
+        </Link>
         <nav>
           <ul className="flex space-x-4">
             <li>Popular</li>
-            <li>Favorites</li>
+            <Link href="/favorites">Favorites</Link>
             <li>Genres</li>
           </ul>
         </nav>

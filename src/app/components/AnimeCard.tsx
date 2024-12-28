@@ -7,15 +7,7 @@ import classnames from "classnames";
 import { useFavorites } from "@/hooks/useFavorites";
 
 export function AnimeCard(anime: AnimeProps) {
-  const { favs, addFav, removeFav } = useFavorites();
-
-  const handleFavorite = () => {
-    if (!favs.includes(anime.id)) {
-      addFav(anime.id);
-    } else {
-      removeFav(anime.id);
-    }
-  };
+  const { favs, handleFavorite } = useFavorites();
 
   return (
     <li className="bg-gray-900 shadow-md rounded-lg overflow-hidden m-4 h-96 min-w-60">
@@ -33,7 +25,7 @@ export function AnimeCard(anime: AnimeProps) {
       <div className="flex justify-between">
         <span>{anime.startDate.year}</span>
         <span>`Episodes: {anime.episodes}`</span>
-        <button onClick={handleFavorite}>
+        <button onClick={() => handleFavorite(anime.id)}>
           <FaHeart
             className={classnames(
               favs.includes(anime.id) && "text-red-500",
@@ -42,6 +34,7 @@ export function AnimeCard(anime: AnimeProps) {
           />
         </button>
       </div>
+      {/* {myFavorites.includes(anime.id) && <span> Is Favorited !</span>} */}
     </li>
   );
 }

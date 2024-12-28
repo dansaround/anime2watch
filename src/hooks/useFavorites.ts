@@ -10,9 +10,7 @@ export const useFavorites = () => {
   const [localFavs, setLocalFavs] = useState<number[]>([]);
 
   useEffect(() => {
-    if (myFavorites.length) {
-      setLocalFavs(myFavorites);
-    }
+    setLocalFavs(myFavorites);
   }, [myFavorites]);
 
   // add fav function
@@ -26,5 +24,13 @@ export const useFavorites = () => {
     setMyFavorites(myFavorites.filter((fav) => fav !== id));
   };
 
-  return { favs: localFavs, addFav, removeFav };
+  const handleFavorite = (id: number) => {
+    if (!myFavorites.includes(id)) {
+      addFav(id);
+    } else {
+      removeFav(id);
+    }
+  };
+
+  return { favs: localFavs, addFav, removeFav, handleFavorite };
 };
