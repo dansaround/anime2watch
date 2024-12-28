@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import MainLayout from "../layouts/MainLayout";
+import MainLayout from "../../layouts/MainLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,18 +17,16 @@ export const metadata: Metadata = {
   description: "The information you need of your favorite anime",
 };
 
-export default function RootLayout({
+export default function FavoritesLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen relative`}
-      >
-        <MainLayout>{children}</MainLayout>
-      </body>
-    </html>
+    <div
+      className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen relative`}
+    >
+      <MainLayout>{children}</MainLayout>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useFavorites } from "@/hooks/useFavorites";
-import { data } from "../../data/main.json";
-import { AnimeCard } from "../components/AnimeCard";
+import { data } from "@/data/main.json";
+import { AnimeCard } from "@/app/components/AnimeCard";
 export default function Favorites() {
   const { favs } = useFavorites();
 

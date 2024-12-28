@@ -1,5 +1,5 @@
+import { AnimeCard } from "@/app/components/AnimeCard";
 import { data } from "@/data/main.json";
-import { AnimeCard } from "../components/AnimeCard";
 
 export type AnimeProps = (typeof data.Page.media)[0];
 

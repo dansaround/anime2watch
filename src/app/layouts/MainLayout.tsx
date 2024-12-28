@@ -1,15 +1,13 @@
 "use client";
 import type { Metadata } from "next";
 import { data } from "@/data/main.json";
-import { AnimeProps } from "../home/page";
+import { AnimeProps } from "@/app/(routes)/home/page";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Banner } from "../components/Banner";
+import { HomeBanner } from "../components/Banners";
 import StarSelector from "../components/domains/home/StarSelector";
 import GenereSelector from "../components/domains/home/GenereSelector";
 import StatusSelector from "../components/domains/home/StatusSelector";
-import Link from "next/link";
-import Image from "next/image";
-import Logo from "../assets/logo.png";
+import Header from "../components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,24 +35,8 @@ export default function MainLayout({
     <div
       className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col bg-gray-100 relative`}
     >
-      <header className="flex bg-black justify-between items-center p-4 border-b-4 border-blue-400">
-        <Link href="/home">
-          <Image src={Logo} alt="Logo" width={100} height={30} />
-        </Link>
-        <nav>
-          <ul className="flex space-x-4">
-            <li>Popular</li>
-            <Link href="/favorites">Favorites</Link>
-            <li>Genres</li>
-          </ul>
-        </nav>
-        <div>
-          <button>Sign In</button>
-        </div>
-      </header>
-
-      <Banner anime={mockData[0]} />
-
+      <Header />
+      <HomeBanner anime={mockData[0]} />
       <div className="flex-grow">
         <div className="grid grid-cols-[1.5fr_6fr] h-full bg-blue-300">
           <Sidebar />
