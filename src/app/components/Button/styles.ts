@@ -23,7 +23,7 @@ export type TColorType =
 
 export const styles = {
   custom: "focus:ring-stroke-button-primary-focus",
-  primary: "bg-[#0049A2]",
+  primary: "bg-[#f0b90b]",
   positive: "bg-[#020202]",
   negative:
     "bg-background-button-negative-default hover:bg-background-button-negative-hover focus:ring-stroke-button-negative-focus active:bg-background-button-negative-active disabled:bg-background-button-solid-disabled",

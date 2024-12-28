@@ -6,7 +6,15 @@ import { AnimeProps } from "../../home/page";
 import { PrimaryButton } from "@/app/components/Button/PrimaryButton";
 import { Text } from "@/app/components/Typography";
 
+import { useQuery } from "@apollo/client";
+import { GET_EXAMPLE_DATA } from "@/lib/queries";
+// import { GetExampleDataResponse } from '../lib/types';
+
 export default function DetailsPage() {
+  const { loading, error, data: response } = useQuery<any>(GET_EXAMPLE_DATA);
+
+  console.log({ response });
+
   const params = useParams();
   const anime: AnimeProps | undefined = data.Page.media.find(
     (anime) => anime.id === Number(params.id)
@@ -17,10 +25,11 @@ export default function DetailsPage() {
       {params.id}
       {anime && <DetailsBanner anime={anime} />}
 
-      <PrimaryButton>Hola</PrimaryButton>
-      <Text size="2xl" className="text-yellow-300">
-        sdsd
-      </Text>
+      <PrimaryButton>
+        <Text size="lg" className="text-gray-800">
+          sdsd
+        </Text>
+      </PrimaryButton>
     </div>
   );
 }
