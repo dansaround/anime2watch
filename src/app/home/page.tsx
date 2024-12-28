@@ -9,8 +9,6 @@ export default function HomePage() {
   return (
     <div className="flex flex-col space-y-4 justify-start p-4 max-w-full overflow-x-hidden">
       {AnimeRow("Popular", mockData)}
-      {AnimeRow("Favorites", mockData)}
-      {AnimeRow("Genres", mockData)}
     </div>
   );
 }

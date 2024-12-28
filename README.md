@@ -29,8 +29,9 @@ This is a anime library project to showcase the usage of the following stack
 
 ### 3. Favorites Feature
 
-- [ ] Add favorites **favoritos** (Local Storage).
-- [ ] Show saved favorites.
+- [x] Add favorites **favoritos** (Local Storage).
+- [x] Show saved favorites.
+- [ ] Create favorites pages
 - [ ] filter favoritos by status or category.
 
 ### 4. Search

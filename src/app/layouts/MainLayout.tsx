@@ -53,9 +53,7 @@ export default function MainLayout({
       <div className="flex-grow">
         <div className="grid grid-cols-[1.5fr_6fr] h-full bg-blue-300">
           <Sidebar />
-          <main className="bg-black w-full overflow-x-hidden border ">
-            {children}
-          </main>
+          <main className="bg-black w-full overflow-x-hidden ">{children}</main>
         </div>
       </div>
       <footer className="h-12 p-4 w-full bg-black flex justify-center border-t-4 border-blue-500">

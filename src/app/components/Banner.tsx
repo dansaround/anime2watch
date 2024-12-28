@@ -16,7 +16,7 @@ export function Banner({ anime }: { anime: AnimeProps }) {
           <h2 className="text-4xl font-bold text-white  ">
             {anime.title.english || anime.title.native}
           </h2>
-          <span className="text-wrap">`{anime.description}`</span>
+          <span className="text-wrap">`{anime.description.split("<")[0]}`</span>
         </div>
         <div className=" flex justify-center">
           <FaHeart size={40} />

@@ -3,23 +3,17 @@ import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
 import { formatTitle } from "../utils/formatTitle";
 import { AnimeProps } from "../home/page";
-import useLocalStorage from "@/hooks/useLocalStorage";
 import classnames from "classnames";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export function AnimeCard(anime: AnimeProps) {
-  const [storedValue, setStoredValue] = useLocalStorage<{
-    favorites: number[];
-  }>("favorites", {
-    favorites: [],
-  });
+  const { favs, addFav, removeFav } = useFavorites();
 
-  const handleSaveFavorite = () => {
-    if (storedValue.favorites.includes(anime.id)) {
-      setStoredValue((prev) => ({
-        favorites: prev.favorites.filter((favId) => favId !== anime.id),
-      }));
+  const handleFavorite = () => {
+    if (!favs.includes(anime.id)) {
+      addFav(anime.id);
     } else {
-      setStoredValue((prev) => ({ favorites: [...prev.favorites, anime.id] }));
+      removeFav(anime.id);
     }
   };
 
@@ -39,12 +33,11 @@ export function AnimeCard(anime: AnimeProps) {
       <div className="flex justify-between">
         <span>{anime.startDate.year}</span>
         <span>`Episodes: {anime.episodes}`</span>
-
-        <button onClick={() => handleSaveFavorite()}>
+        <button onClick={handleFavorite}>
           <FaHeart
             className={classnames(
-              "cursor-pointer",
-              storedValue?.favorites.includes(anime.id) && "text-red-500"
+              favs.includes(anime.id) && "text-red-500",
+              "cursor-pointer transition-colors duration-300"
             )}
           />
         </button>
