@@ -135,7 +135,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, IBaseButtonProps>(
 
     useEffect(() => {
       if (!innerRef) return;
-      innerRef.current && setButtonWidth(innerRef.current.offsetWidth);
+      if (innerRef.current) setButtonWidth(innerRef.current.offsetWidth);
     }, [innerRef]);
 
     return (
@@ -145,8 +145,8 @@ export const BaseButton = forwardRef<HTMLButtonElement, IBaseButtonProps>(
         type={type}
         className={classes}
         onClick={(event) => {
-          innerRef.current && setButtonWidth(innerRef.current.offsetWidth);
-          onClick && onClick(event);
+          if (innerRef.current) setButtonWidth(innerRef.current.offsetWidth);
+          if (onClick) onClick(event);
         }}
         disabled={loading || props.disabled}
       >

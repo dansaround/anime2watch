@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { IGhostButtonProps } from "./GhostButton";
 import { BaseButton } from "./BaseButton";
 
-export interface ISecondaryButtonProps extends IGhostButtonProps {}
+export type ISecondaryButtonProps = IGhostButtonProps;
 
 export const SecondaryButton = forwardRef<HTMLButtonElement, IGhostButtonProps>(
   ({ color = "primary", ...props }, forwardedRef) => {

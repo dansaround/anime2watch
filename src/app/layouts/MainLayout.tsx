@@ -14,6 +14,7 @@ import { SkeletonRectangle } from "../components/SkeletonRectangle";
 import { useAtom } from "jotai";
 import { filtersStateAtom } from "@/app/states/filters-state";
 import { useFilteredAnimes } from "@/hooks/useFiltersAnimes";
+import { Anime } from "@/lib/types";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,7 +44,7 @@ export default function MainLayout({
       : data
       ? shuffle(
           data.Page.media.filter(
-            (anime: any) =>
+            (anime: Anime) =>
               anime.bannerImage != null && anime.description.length
           )
         ).slice(0, 3)

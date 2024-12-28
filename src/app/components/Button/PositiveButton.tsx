@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { BaseButton, IBaseButtonProps } from "./BaseButton";
 
-export interface IPositiveButtonProps extends Omit<IBaseButtonProps, "color"> {}
+export type IPositiveButtonProps = Omit<IBaseButtonProps, "color">;
 
 export const PositiveButton = forwardRef<
   HTMLButtonElement,

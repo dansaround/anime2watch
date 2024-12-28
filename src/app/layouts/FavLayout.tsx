@@ -5,6 +5,7 @@ import { GET_HERO_SECTION_ANIMES } from "@/lib/queries";
 import { useQuery } from "@apollo/client";
 import { shuffle } from "lodash";
 import { SkeletonRectangle } from "../components/SkeletonRectangle";
+import { Anime } from "@/lib/types";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,7 @@ export default function FavLayout({
       : data
       ? shuffle(
           data.Page.media.filter(
-            (anime: any) =>
+            (anime: Anime) =>
               anime.bannerImage != null && anime.description.length
           )
         ).slice(0, 3)

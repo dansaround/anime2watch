@@ -21,7 +21,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     const urlSearch = getSearchFromURL();
-    urlSearch && setSearch(urlSearch);
+    if (urlSearch) setSearch(urlSearch);
   }, []);
 
   const debouncedSearch = useDebounce(search, 500);

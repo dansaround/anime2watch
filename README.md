@@ -32,19 +32,19 @@ This is a anime library project to showcase the usage of the following stack
 - [x] Add favorites **favoritos** (Local Storage).
 - [x] Show saved favorites.
 - [x] Create favorites pages
-- [ ] filter favoritos by status or category.
+- [x] filter favoritos by status or category.
 
 ### 4. Search
 
-- [ ] Implement search:
+- [x] Implement search:
   - [x] UI
-  - [ ] text-search
-  - [ ] filter search
+  - [x] text-search
+  - [x] filter search
 
 ### 5. DetailPage
 
 - [x] Send selected anime Id.
-- [ ] Show complete info: nombre, estado, episodios, score, categorías, temporada, studio, y resumen.
+- [x] Show complete info: nombre, estado, episodios, score, categorías, temporada, studio, y resumen.
 
 ### 6. Design
 
@@ -76,4 +76,3 @@ This is a anime library project to showcase the usage of the following stack
 
 - [ ] Login feature using Clerk.
 - [ ] Profiles
-- [ ] OpenAI integration ->.

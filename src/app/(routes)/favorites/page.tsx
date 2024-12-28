@@ -6,7 +6,6 @@ import { GET_ANIMES_BY_IDS } from "@/lib/queries";
 import { SkeletonRectangle } from "@/app/components/SkeletonRectangle";
 import { GetPaginatedRecentAnimesInterface } from "@/lib/types";
 import { FavCard } from "@/app/components/FavCard";
-import { AnimeCard } from "@/app/components/AnimeCard";
 
 export default function Favorites() {
   const { favs } = useFavorites();
@@ -36,7 +35,7 @@ export default function Favorites() {
   return (
     <div className="w-full pb-2 pl-8">
       <Text.Bold size="2xl" className="text-yellow-400 pr-14">
-        Animes you've favorited
+        {"Animes you've favorited"}
       </Text.Bold>
       <ul className="flex items-center flex-wrap gap-6 mt-6">
         {loading

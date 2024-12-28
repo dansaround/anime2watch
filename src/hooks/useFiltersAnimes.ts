@@ -24,7 +24,7 @@ export function useFilteredAnimes({ perPage = 5 }: { perPage?: number }) {
   useEffect(() => {
     setPage(1);
 
-    let newVariables = { ...variables };
+    const newVariables = { ...variables };
 
     if (filters.genders.length) {
       newVariables.genders = filters.genders;
