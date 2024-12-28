@@ -34,7 +34,6 @@ export default function StatusSelector() {
       ? newStatus.filter((s) => s !== status.value)
       : [...newStatus, status.value];
 
-    console.log("asdasdasdd ", updatedStatus);
     setFilters({ ...filters, statuses: updatedStatus });
   };
 
