@@ -3,11 +3,17 @@ import type { Metadata } from "next";
 import { data } from "@/data/main.json";
 import { AnimeProps } from "@/app/(routes)/home/page";
 import { Geist, Geist_Mono } from "next/font/google";
-import { HomeBanner } from "../components/Banners";
+import { HomeBanner } from "../components/Banners/HomeBanner";
 import StarSelector from "../components/domains/home/StarSelector";
 import GenereSelector from "../components/domains/home/GenereSelector";
 import StatusSelector from "../components/domains/home/StatusSelector";
 import Header from "../components/Header";
+import { Text } from "../components/Typography";
+import { Input } from "@/components/ui/input";
+import { GET_HERO_SECTION_ANIMES } from "@/lib/queries";
+import { useQuery } from "@apollo/client";
+import { shuffle } from "lodash";
+import { SkeletonRectangle } from "../components/SkeletonRectangle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,22 +35,39 @@ export default function MainLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const mockData: AnimeProps[] = data.Page.media;
+  const { loading, data } = useQuery(GET_HERO_SECTION_ANIMES);
+
+  const getHeroAnimes = () => {
+    return loading
+      ? []
+      : data
+      ? shuffle(
+          data.Page.media.filter(
+            (anime: any) =>
+              anime.bannerImage != null && anime.description.length
+          )
+        ).slice(0, 3)
+      : [];
+  };
 
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col bg-gray-100 relative`}
     >
       <Header />
-      <HomeBanner anime={mockData[0]} />
+      <div className="min-h-96">
+        <HomeBanner animes={getHeroAnimes()} isLoading={loading} />
+      </div>
       <div className="flex-grow">
-        <div className="grid grid-cols-[1.5fr_6fr] h-full bg-blue-300">
+        <div className="grid grid-cols-[1.2fr_6fr] h-full bg-yellow-300">
           <Sidebar />
           <main className="bg-black w-full overflow-x-hidden ">{children}</main>
         </div>
       </div>
-      <footer className="h-12 p-4 w-full bg-black flex justify-center border-t-4 border-blue-500">
-        Made with ❤️ by Daniel Kcomt :D
+      <footer className="h-12 p-4 w-full bg-black flex justify-center border-t-4 border-yellow-400">
+        <Text size="base" weight="semibold" className="text-gray-300">
+          Made with ❤️ by Daniel Kcomt :D
+        </Text>
       </footer>
     </div>
   );
@@ -52,25 +75,32 @@ export default function MainLayout({
 
 function Sidebar() {
   return (
-    <aside className="bg-gray-700 w-full h-full flex flex-col pt-10 px-3 gap-3">
-      <span className="text-2xl font-semibold pt-6 pb-2">Busqueda</span>
-      <input placeholder="Búsqueda" />
+    <aside className="bg-neutral-800 w-full h-full flex flex-col pt-3 px-3 gap-3">
+      <section className=" flex flex-col pt-3 px-3 gap-1">
+        <div className="flex justify-center">
+          <Text
+            size="2xl"
+            weight="bold"
+            className="pb-2 text-center text-yellow-400"
+          >
+            Filters{" "}
+          </Text>
+        </div>
 
-      <span className="text-2xl font-semibold pt-6 pb-2">Filtros</span>
+        <StarSelector
+          onSelectStar={(value) => {
+            console.log(value);
+          }}
+        />
 
-      <StarSelector
-        onSelectStar={(value) => {
-          console.log(value);
-        }}
-      />
+        <GenereSelector
+          onSelectGenere={(value) => console.log("GENERE SELECTED : " + value)}
+        />
 
-      <GenereSelector
-        onSelectGenere={(value) => console.log("GENERE SELECTED : " + value)}
-      />
-
-      <StatusSelector
-        onSelectStatus={(value) => console.log("GENERE SELECTED : " + value)}
-      />
+        <StatusSelector
+          onSelectStatus={(value) => console.log("GENERE SELECTED : " + value)}
+        />
+      </section>
     </aside>
   );
 }

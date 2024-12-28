@@ -2,6 +2,7 @@
 import { useState } from "react";
 import classnames from "classnames";
 import { FaChevronDown } from "react-icons/fa";
+import { Text } from "@/app/components/Typography";
 
 interface GenereSelectorProps {
   onSelectGenere: (genere: string) => void;
@@ -41,11 +42,14 @@ export default function GenereSelector({
   return (
     <div className="w-full flex flex-col pt-6 pb-2">
       <div className="flex w-full justify-between items-center">
-        <span className="text-xl font-semibold">Género</span>
+        <span className="text-xl font-semibold">Gender</span>
 
         <FaChevronDown
           onClick={() => setShowGeneres(!showGeneres)}
-          className={classnames("cursor-pointer", showGeneres && "rotate-180")}
+          className={classnames(
+            "cursor-pointer transition-all duration-200",
+            showGeneres && "rotate-180"
+          )}
         />
       </div>
 
@@ -57,10 +61,16 @@ export default function GenereSelector({
               key={genere}
               className={classnames(
                 "cursor-pointer",
-                localSelectedGenere === genere && "text-red-500"
+                localSelectedGenere === genere && "text-yellow-500"
               )}
             >
-              {genere}
+              <Text
+                size={localSelectedGenere === genere ? "xl" : "lg"}
+                weight={localSelectedGenere === genere ? "semibold" : "regular"}
+                className="transition-all duration-300"
+              >
+                {genere}
+              </Text>
             </li>
           ))}
         </ul>

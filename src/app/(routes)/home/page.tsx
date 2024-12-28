@@ -1,5 +1,9 @@
-import { AnimeCard } from "@/app/components/AnimeCard";
+"use client";
+
 import { data } from "@/data/main.json";
+import PopularSection from "@/app/components/domains/home/PopularSection";
+import RecentsSection from "@/app/components/domains/home/RecentsSection";
+import UpcomingSection from "@/app/components/domains/home/UpcomingSection";
 
 export type AnimeProps = (typeof data.Page.media)[0];
 
@@ -7,21 +11,10 @@ export default function HomePage() {
   const mockData = data.Page.media;
 
   return (
-    <div className="flex flex-col space-y-4 justify-start p-4 max-w-full overflow-x-hidden">
-      {AnimeRow("Popular", mockData)}
-    </div>
-  );
-}
-
-function AnimeRow(title: String, animes: AnimeProps[]) {
-  return (
-    <div className="w-full mx-auto ">
-      <h3 className="text-2xl font-bold">{title}</h3>
-      <ul className="flex overflow-x-auto  ">
-        {animes.map((anime) => {
-          return <AnimeCard key={anime.id} {...anime} />;
-        })}
-      </ul>
+    <div className="flex flex-col space-y-4 gap-8 justify-start p-6 max-w-full overflow-x-hidden">
+      <PopularSection />
+      <UpcomingSection />
+      <RecentsSection />
     </div>
   );
 }

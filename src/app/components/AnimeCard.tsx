@@ -1,13 +1,15 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
+import classnames from "classnames";
+import { Text } from "./Typography";
+import { Anime } from "@/lib/types";
 import { FaHeart } from "react-icons/fa";
 import { formatTitle } from "../utils/formatTitle";
-import { AnimeProps } from "@/app/(routes)/home/page";
-import classnames from "classnames";
 import { useFavorites } from "@/hooks/useFavorites";
-import Link from "next/link";
+import Score from "./Score";
 
-export function AnimeCard(anime: AnimeProps) {
+export function AnimeCard(anime: Anime) {
   const { favs, handleFavorite } = useFavorites();
 
   const handleClickOnFavorite = (
@@ -19,32 +21,58 @@ export function AnimeCard(anime: AnimeProps) {
   };
 
   return (
-    <li className="bg-gray-900 shadow-md rounded-lg overflow-hidden m-4 h-96 min-w-60">
-      <Link href={`/details/${anime.id}`}>
-        <div className="h-60 relative">
-          <Image
-            objectFit="cover"
-            layout="fill"
-            src={anime.coverImage.large}
-            alt={`Cover image for ${anime.title.english || anime.title.native}`}
-          />
-        </div>
-        <h3 className="text-lg font-bold">
-          {formatTitle(40, anime.title.english || anime.title.native)}
-        </h3>
-        <div className="flex justify-between">
-          <span>{anime.startDate.year}</span>
-          <span>`Episodes: {anime.episodes}`</span>
-          <button onClick={(event) => handleClickOnFavorite(anime.id, event)}>
-            <FaHeart
-              className={classnames(
-                favs.includes(anime.id) && "text-red-500",
-                "cursor-pointer transition-colors duration-300"
-              )}
+    <li className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative ">
+      <Link
+        href={`/details/${anime.id}`}
+        className="grid grid-rows-[208px_1fr] h-full"
+      >
+        <div className="h-52 relative">
+          {anime.coverImage ? (
+            <Image
+              objectFit="cover"
+              layout="fill"
+              src={anime.coverImage.large}
+              alt={`Cover image for ${
+                anime.title.english || anime.title.native
+              }`}
             />
-          </button>
+          ) : (
+            <div className="w-full h-full bg-black" />
+          )}
         </div>
+
+        <section className="h-full px-2 py-3 flex flex-col justify-between items-start gap-2">
+          <Text.Bold size="lg" className="text-lg font-bold">
+            {formatTitle(40, anime.title.english || anime.title.native || "")}
+          </Text.Bold>
+
+          <div className="w-full flex justify-between items-center">
+            <div className="w-full flex flex-col justify-end items-start">
+              <Text size="sm">{anime.startDate.year}</Text>
+              <Text size="sm">{anime.episodes} episodes</Text>
+            </div>
+
+            <div className="self-end mb-1">
+              {anime.averageScore && (
+                <Score score={anime.averageScore} size={10} />
+              )}
+            </div>
+          </div>
+        </section>
       </Link>
+
+      <button
+        className="absolute top-2 right-2"
+        onClick={(event) => handleClickOnFavorite(anime.id, event)}
+      >
+        <FaHeart
+          size={18}
+          className={classnames(
+            favs.includes(anime.id) && "text-red-500",
+            "cursor-pointer transition-colors duration-300"
+          )}
+        />
+      </button>
     </li>
   );
 }

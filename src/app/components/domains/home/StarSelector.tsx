@@ -3,6 +3,7 @@
 import { useState } from "react";
 import classnames from "classnames";
 import { FaStar } from "react-icons/fa";
+import { Text } from "@/app/components/Typography";
 
 export default function StarSelector({
   onSelectStar,
@@ -20,15 +21,17 @@ export default function StarSelector({
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-xl font-semibold pt-6 pb-2">Puntuación</span>
-
+      <Text size="xl" weight="bold">
+        Rating
+      </Text>
       <div className="flex gap-1">
         {[...Array(5)].map((_, index) => {
           return (
             <FaStar
+              size={35}
               key={index}
               className={classnames(
-                "cursor-pointer",
+                "cursor-pointer transition-all duration-300",
                 index <= selectedIndex ? "text-yellow-300" : "text-gray-400"
               )}
               onClick={() => handleClick(index)}

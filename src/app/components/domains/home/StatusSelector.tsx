@@ -2,6 +2,7 @@
 import { useState } from "react";
 import classnames from "classnames";
 import { FaChevronDown } from "react-icons/fa";
+import { Text } from "@/app/components/Typography";
 
 interface StatusSelectorProps {
   onSelectStatus: (status: string) => void;
@@ -45,10 +46,18 @@ export default function StatusSelector({
               key={status.value}
               className={classnames(
                 "cursor-pointer",
-                localSelectedStatus === status.value && "text-red-500"
+                localSelectedStatus === status.value && "text-yellow-500"
               )}
             >
-              {status.label}
+              <Text
+                size={localSelectedStatus === status.value ? "xl" : "lg"}
+                weight={
+                  localSelectedStatus === status.value ? "semibold" : "regular"
+                }
+                className="transition-all duration-300"
+              >
+                {status.label}
+              </Text>
             </li>
           ))}
         </ul>

@@ -25,7 +25,7 @@ This is a anime library project to showcase the usage of the following stack
 - [x] Footer
 - [x] Cards with basic info (nombre, formato, episodios, categorías, imagen, score y status,).
 - [x] Banner section
-- [ ] Pagination.
+- [x] Pagination.
 
 ### 3. Favorites Feature
 
@@ -37,21 +37,19 @@ This is a anime library project to showcase the usage of the following stack
 ### 4. Search
 
 - [ ] Implement search:
-  - Search animes by **nombre**.
-  - Filter by **score**.
-  - Filter by **categoría**.
-  - Filter by **estado**.
+  - [x] UI
+  - [ ] text-search
+  - [ ] filter search
 
 ### 5. DetailPage
 
 - [x] Send selected anime Id.
 - [ ] Show complete info: nombre, estado, episodios, score, categorías, temporada, studio, y resumen.
-- [x] Show Image Trailer.
 
 ### 6. Design
 
 - [x] Implement Design System
-- [ ] Add animations.
+- [x] Add animations.
 - [ ] Add responsive
 
 ### 7. SEO
@@ -77,5 +75,5 @@ This is a anime library project to showcase the usage of the following stack
 ## Extra:
 
 - [ ] Login feature using Clerk.
-- [ ] Improve Favorites experience
-- [ ] OpenAI integration for better recomendations.
+- [ ] Profiles
+- [ ] OpenAI integration ->.
