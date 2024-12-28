@@ -44,12 +44,13 @@ This is a anime library project to showcase the usage of the following stack
 
 ### 5. DetailPage
 
-- [ ] Send selected anime Id.
+- [x] Send selected anime Id.
 - [ ] Show complete info: nombre, estado, episodios, score, categorías, temporada, studio, y resumen.
-- [ ] Show Image.
+- [x] Show Image Trailer.
 
-### 6. Responsive Design
+### 6. Design
 
+- [x] Implement Design System
 - [ ] Add animations.
 - [ ] Add responsive
 
