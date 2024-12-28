@@ -1,17 +1,23 @@
 "use client";
 import { useState } from "react";
+import { useAtom } from "jotai";
 import classnames from "classnames";
 import { FaChevronDown } from "react-icons/fa";
 import { Text } from "@/app/components/Typography";
+import { filtersStateAtom } from "@/app/states/filters-state";
 
-interface StatusSelectorProps {
-  onSelectStatus: (status: string) => void;
-}
+type Status =
+  | "FINISHED"
+  | "RELEASING"
+  | "NOT_YET_RELEASED"
+  | "CANCELLED"
+  | "HIATUS";
 
-export default function StatusSelector({
-  onSelectStatus,
-}: StatusSelectorProps) {
-  const status = [
+export default function StatusSelector() {
+  const status: {
+    label: string;
+    value: Status;
+  }[] = [
     { label: "Finished", value: "FINISHED" },
     { label: "Releasing", value: "RELEASING" },
     { label: "Not Released Yet", value: "NOT_YET_RELEASED" },
@@ -19,18 +25,23 @@ export default function StatusSelector({
     { label: "Production paused", value: "HIATUS" },
   ];
 
+  const [filters, setFilters] = useAtom(filtersStateAtom);
   const [showGeneres, setShowGeneres] = useState(false);
-  const [localSelectedStatus, setLocalSelectedStatus] = useState("");
 
-  const handleSelectStatus = (status: { label: string; value: string }) => {
-    onSelectStatus(status.value);
-    setLocalSelectedStatus(status.value);
+  const handleSelectStatus = (status: { label: string; value: Status }) => {
+    const newStatus = (filters.statuses || []) as Status[];
+    const updatedStatus = newStatus.includes(status.value)
+      ? newStatus.filter((s) => s !== status.value)
+      : [...newStatus, status.value];
+
+    console.log("asdasdasdd ", updatedStatus);
+    setFilters({ ...filters, statuses: updatedStatus });
   };
 
   return (
     <div className="w-full flex flex-col pt-6 pb-2">
       <div className="flex w-full justify-between items-center">
-        <span className="text-xl font-semibold">Status</span>
+        <Text.Bold size="lg">Status</Text.Bold>
 
         <FaChevronDown
           onClick={() => setShowGeneres(!showGeneres)}
@@ -46,18 +57,12 @@ export default function StatusSelector({
               key={status.value}
               className={classnames(
                 "cursor-pointer",
-                localSelectedStatus === status.value && "text-yellow-500"
+                filters.statuses?.includes(status.value) && "text-yellow-500"
               )}
             >
-              <Text
-                size={localSelectedStatus === status.value ? "xl" : "lg"}
-                weight={
-                  localSelectedStatus === status.value ? "semibold" : "regular"
-                }
-                className="transition-all duration-300"
-              >
+              <Text.Semibold size="sm" className="transition-all duration-300">
                 {status.label}
-              </Text>
+              </Text.Semibold>
             </li>
           ))}
         </ul>

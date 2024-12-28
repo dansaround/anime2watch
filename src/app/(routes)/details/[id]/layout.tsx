@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from "@/app/components/Header";
-import { DetailsBanner } from "@/app/components/Banners";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,16 +16,15 @@ export const metadata: Metadata = {
   description: "The information you need of your favorite anime",
 };
 
-export default function FavoritesLayout({
+export default function DetailLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen relative`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen relative w-full`}
     >
-      <Header />
       {children}
     </div>
   );

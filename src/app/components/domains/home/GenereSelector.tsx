@@ -1,16 +1,12 @@
 "use client";
 import { useState } from "react";
+import { useAtom } from "jotai";
 import classnames from "classnames";
 import { FaChevronDown } from "react-icons/fa";
 import { Text } from "@/app/components/Typography";
+import { filtersStateAtom } from "@/app/states/filters-state";
 
-interface GenereSelectorProps {
-  onSelectGenere: (genere: string) => void;
-}
-
-export default function GenereSelector({
-  onSelectGenere,
-}: GenereSelectorProps) {
+export default function GenereSelector() {
   const generes = [
     "Action",
     "Adventure",
@@ -18,7 +14,9 @@ export default function GenereSelector({
     "Drama",
     "Ecchi",
     "Fantasy",
+    "Hentai",
     "Horror",
+    "Mahou Shoujo",
     "Mecha",
     "Music",
     "Mystery",
@@ -31,18 +29,23 @@ export default function GenereSelector({
     "Thriller",
   ];
 
+  const [filters, setFilters] = useAtom(filtersStateAtom);
   const [showGeneres, setShowGeneres] = useState(false);
-  const [localSelectedGenere, setLocalSelectedGenere] = useState("");
 
   const handleSelectGenere = (genere: string) => {
-    setLocalSelectedGenere(genere);
-    onSelectGenere(genere);
+    const updatedGeneres = filters.genders.includes(genere)
+      ? filters.genders.filter((g) => g !== genere)
+      : [...filters.genders, genere];
+
+    setFilters({ ...filters, genders: updatedGeneres });
   };
 
   return (
     <div className="w-full flex flex-col pt-6 pb-2">
       <div className="flex w-full justify-between items-center">
-        <span className="text-xl font-semibold">Gender</span>
+        <Text.Bold size="lg" className="">
+          Gender
+        </Text.Bold>
 
         <FaChevronDown
           onClick={() => setShowGeneres(!showGeneres)}
@@ -61,16 +64,12 @@ export default function GenereSelector({
               key={genere}
               className={classnames(
                 "cursor-pointer",
-                localSelectedGenere === genere && "text-yellow-500"
+                filters.genders.includes(genere) && "text-yellow-500"
               )}
             >
-              <Text
-                size={localSelectedGenere === genere ? "xl" : "lg"}
-                weight={localSelectedGenere === genere ? "semibold" : "regular"}
-                className="transition-all duration-300"
-              >
+              <Text.Semibold size="sm" className="transition-all duration-300">
                 {genere}
-              </Text>
+              </Text.Semibold>
             </li>
           ))}
         </ul>

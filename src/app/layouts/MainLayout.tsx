@@ -1,19 +1,19 @@
 "use client";
 import type { Metadata } from "next";
-import { data } from "@/data/main.json";
-import { AnimeProps } from "@/app/(routes)/home/page";
 import { Geist, Geist_Mono } from "next/font/google";
 import { HomeBanner } from "../components/Banners/HomeBanner";
 import StarSelector from "../components/domains/home/StarSelector";
 import GenereSelector from "../components/domains/home/GenereSelector";
 import StatusSelector from "../components/domains/home/StatusSelector";
-import Header from "../components/Header";
 import { Text } from "../components/Typography";
-import { Input } from "@/components/ui/input";
+import { PrimaryButton } from "../components/Button/PrimaryButton";
 import { GET_HERO_SECTION_ANIMES } from "@/lib/queries";
 import { useQuery } from "@apollo/client";
 import { shuffle } from "lodash";
 import { SkeletonRectangle } from "../components/SkeletonRectangle";
+import { useAtom } from "jotai";
+import { filtersStateAtom } from "@/app/states/filters-state";
+import { useFilteredAnimes } from "@/hooks/useFiltersAnimes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,11 +51,8 @@ export default function MainLayout({
   };
 
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col bg-gray-100 relative`}
-    >
-      <Header />
-      <div className="min-h-96">
+    <div className="antialiased h-full flex flex-col bg-gray-100 relative">
+      <div className="min-h-96 -mt-16">
         <HomeBanner animes={getHeroAnimes()} isLoading={loading} />
       </div>
       <div className="flex-grow">
@@ -64,42 +61,39 @@ export default function MainLayout({
           <main className="bg-black w-full overflow-x-hidden ">{children}</main>
         </div>
       </div>
-      <footer className="h-12 p-4 w-full bg-black flex justify-center border-t-4 border-yellow-400">
-        <Text size="base" weight="semibold" className="text-gray-300">
-          Made with ❤️ by Daniel Kcomt :D
-        </Text>
-      </footer>
     </div>
   );
 }
 
 function Sidebar() {
+  const [filters, setFilters] = useAtom(filtersStateAtom);
+
+  const { hasFiltersApplied, resetFilters } = useFilteredAnimes({});
+
   return (
-    <aside className="bg-neutral-800 w-full h-full flex flex-col pt-3 px-3 gap-3">
-      <section className=" flex flex-col pt-3 px-3 gap-1">
-        <div className="flex justify-center">
-          <Text
-            size="2xl"
-            weight="bold"
-            className="pb-2 text-center text-yellow-400"
-          >
-            Filters{" "}
-          </Text>
+    <aside className="bg-black w-full h-full flex flex-col pt-3 px-3 gap-3">
+      <section className=" flex flex-col pt-3 px-3 gap-3">
+        <div className="flex justify-between items-center mb-5">
+          <Text.Bold size="xl" className="pb-2 text-center text-yellow-400">
+            Filters
+          </Text.Bold>
+
+          {hasFiltersApplied && (
+            <button className="scale-75" onClick={resetFilters}>
+              <Text.Semibold className="underline">Reset Filters</Text.Semibold>
+            </button>
+          )}
         </div>
 
         <StarSelector
           onSelectStar={(value) => {
-            console.log(value);
+            setFilters((prev) => ({ ...prev, rating: value }));
           }}
         />
 
-        <GenereSelector
-          onSelectGenere={(value) => console.log("GENERE SELECTED : " + value)}
-        />
+        <GenereSelector />
 
-        <StatusSelector
-          onSelectStatus={(value) => console.log("GENERE SELECTED : " + value)}
-        />
+        <StatusSelector />
       </section>
     </aside>
   );

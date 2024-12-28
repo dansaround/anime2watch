@@ -1,6 +1,6 @@
-import MainLayout from "@/app/layouts/MainLayout";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import SearchLayout from "@/app/layouts/SearchLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,18 +13,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Anime2Watch",
+  title: "Anime2Watch | Search",
   description: "The information you need of your favorite anime",
 };
 
-export default function RootLayout({
+export default function SearchRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <div className="w-full h-full relative">
-      <MainLayout>{children}</MainLayout>
+    <div className="flex w-full h-full flex-col bg-black pt-20 pb-8 px-20 overflow-x-hidden">
+      {children}
     </div>
   );
 }

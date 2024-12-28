@@ -33,7 +33,7 @@ export default function PopularAnimes() {
                 "No title available"}
             </Text.Bold>
             <img
-              src={anime.coverImage.large}
+              src={anime.coverImage.extraLarge}
               alt={anime.title.english || anime.title.native || "Anime cover"}
               className="w-32 h-48 object-cover"
             />

@@ -5,6 +5,7 @@ import { usePopularAnimes } from "@/hooks/usePopularAnimes";
 import { AnimeCard } from "../../AnimeCard";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SkeletonRectangle } from "../../SkeletonRectangle";
+import { FavCard } from "../../FavCard";
 
 export default function PopularSection() {
   const {
@@ -28,7 +29,9 @@ export default function PopularSection() {
             ? Array.from({ length: 10 }).map((_, index) => (
                 <SkeletonRectangle key={index} className="w-56 h-80" />
               ))
-            : animes.map((anime) => <AnimeCard key={anime.id} {...anime} />)}
+            : animes.map((anime, index) => (
+                <FavCard key={anime.id} anime={anime} index={index} />
+              ))}
         </ul>
 
         <ScrollBar orientation="horizontal" />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import MainLayout from "../../layouts/MainLayout";
+import FavLayout from "@/app/layouts/FavLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,10 +24,8 @@ export default function FavoritesLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen relative`}
-    >
-      <MainLayout>{children}</MainLayout>
+    <div className="w-full h-full relative">
+      <FavLayout>{children}</FavLayout>
     </div>
   );
 }

@@ -9,15 +9,24 @@ import classNames from "classnames";
 import { FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { SearchInput } from "@/components/SearchInput";
+import { searchAtom } from "../states/search-state";
+import { useAtom } from "jotai";
+import { usePathname, useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [search, setSearch] = useAtom(searchAtom);
+
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      setIsScrolled(offset > 40);
+      setIsScrolled(offset > 60);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -27,28 +36,48 @@ export default function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("q");
+    if (query) {
+      setSearch(query);
+      setIsSearching(true);
+    }
+  }, []);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    setSearch(inputValue);
+
+    // Update the search parameter in the URL dynamically in real-time
+    const params = new URLSearchParams(window.location.search);
+    if (inputValue.length) {
+      params.set("q", encodeURIComponent(inputValue));
+      router.replace(`/search?${params.toString()}`);
+    } else {
+      setTimeout(() => router.replace("/home"), 300);
+    }
+  };
+
   return (
     <header
-      className={classNames(
+      className={cn(
         `fixed top-0 left-0 w-full transition-all duration-300 ${
-          isScrolled
-            ? "bg-black "
-            : "bg-gradient-to-b from-black/80 to-transparent"
+          !isScrolled
+            ? "bg-gradient-to-b from-black/60 to-transparent"
+            : "bg-black"
         }`,
         "flex justify-between h-16 items-center px-20 z-20"
       )}
     >
       <div className="flex items-center gap-12 ">
         <Link href="/home">
-          <Text size="xl" weight="bold" className={classNames(` text-white`)}>
-            Anime2Watch
-          </Text>
+          <Text.Bold size="xl" className={classNames(` text-white`)}>
+            Anime2Watch {isScrolled ? "🔥" : ""}
+          </Text.Bold>
         </Link>
         <nav>
           <ul className="flex space-x-4">
-            <li>
-              <Text size="lg">Popular</Text>
-            </li>
             <Link href="/favorites">
               <Text size="lg">Favorites</Text>
             </Link>
@@ -90,13 +119,17 @@ export default function Header() {
               className="flex items-center gap-4 origin-center"
             >
               <SearchInput
-                placeholder="title here..."
-                onBlur={() => setIsSearching(false)}
                 autoFocus
+                placeholder="title here..."
+                value={search}
+                onChange={handleSearchChange}
+                onBlur={() => !search && setIsSearching(false)}
               />
             </motion.div>
           ) : (
-            <FaSearch size={20} onClick={() => setIsSearching(!isSearching)} />
+            <button onClick={() => setIsSearching(!isSearching)}>
+              <FaSearch size={20} />
+            </button>
           )}
         </div>
         <div className="flex items-center w-48">

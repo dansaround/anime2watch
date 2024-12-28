@@ -13,7 +13,7 @@ export interface Anime {
   episodes: number | null;
   genres: string[];
   coverImage: {
-    large: string;
+    extraLarge: string;
   };
   bannerImage: string | null;
   averageScore?: number;
@@ -46,3 +46,9 @@ export interface GetPaginatedRecentAnimesInterface {
     media: Anime[];
   };
 }
+
+export type ChartData = {
+  rates: string;
+  points: number;
+  fill: string;
+};

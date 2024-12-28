@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-
 import { useLocalStorage } from "usehooks-ts";
 
 export const useFavorites = () => {
-  const [myFavorites = [], setMyFavorites, removeValue] = useLocalStorage<
-    number[]
-  >("favorites", []);
+  const [myFavorites = [], setMyFavorites] = useLocalStorage<number[]>(
+    "favorites",
+    []
+  );
 
   const [localFavs, setLocalFavs] = useState<number[]>([]);
 
   useEffect(() => {
-    setLocalFavs(myFavorites);
+    if (typeof window !== "undefined") {
+      setLocalFavs(myFavorites);
+    }
   }, [myFavorites]);
 
-  // add fav function
   const addFav = (id: number) => {
     if (!myFavorites.includes(id)) {
       setMyFavorites([...myFavorites, id]);

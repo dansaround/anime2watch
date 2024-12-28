@@ -1,0 +1,80 @@
+{
+  "data": {
+    "Page": {
+      "media": [
+        {
+          "reviews": {
+            "pageInfo": {
+              "total": 500,
+              "currentPage": 1,
+              "lastPage": 100,
+              "hasNextPage": true
+            },
+            "nodes": [
+              {
+                "id": 760,
+                "summary": "Cowboy Bebop is a smash-hit jam session",
+                "score": 100,
+                "user": {
+                  "id": 22003,
+                  "name": "Giovanni",
+                  "avatar": {
+                    "large": "https://s4.anilist.co/file/anilistcdn/user/avatar/large/22003-pluP89UXFOYq.png"
+                  }
+                }
+              },
+              {
+                "id": 2242,
+                "summary": "Review of Cowboy Bebop",
+                "score": 100,
+                "user": {
+                  "id": 98098,
+                  "name": "ToeBeans",
+                  "avatar": {
+                    "large": "https://s4.anilist.co/file/anilistcdn/user/avatar/large/98098-OHfrX9d7wIVQ.jpg"
+                  }
+                }
+              },
+              {
+                "id": 3398,
+                "summary": "Okay, 3, 2, 1 let's jam",
+                "score": 100,
+                "user": {
+                  "id": 173334,
+                  "name": "TheRealKyuubey",
+                  "avatar": {
+                    "large": "https://s4.anilist.co/file/anilistcdn/user/avatar/large/b173334-U6tLWQoaepDP.png"
+                  }
+                }
+              },
+              {
+                "id": 4534,
+                "summary": "A Story of Facing Your Fate Told via Flawed Characters, Episodic Segments, & Brilliant Musical Composition",
+                "score": 100,
+                "user": {
+                  "id": 279478,
+                  "name": "AdmiralNyan",
+                  "avatar": {
+                    "large": "https://s4.anilist.co/file/anilistcdn/user/avatar/large/b279478-yay54cqzkC1A.jpg"
+                  }
+                }
+              },
+              {
+                "id": 5467,
+                "summary": "A story where you feel like you really get to know the characters",
+                "score": 95,
+                "user": {
+                  "id": 359721,
+                  "name": "GGShang",
+                  "avatar": {
+                    "large": "https://s4.anilist.co/file/anilistcdn/user/avatar/large/b359721-QjtVv6jjYQyR.jpg"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -21,14 +21,12 @@ export default function StarSelector({
 
   return (
     <div className="flex flex-col gap-2">
-      <Text size="xl" weight="bold">
-        Rating
-      </Text>
+      <Text.Bold size="lg">Rating</Text.Bold>
       <div className="flex gap-1">
         {[...Array(5)].map((_, index) => {
           return (
             <FaStar
-              size={35}
+              size={20}
               key={index}
               className={classnames(
                 "cursor-pointer transition-all duration-300",

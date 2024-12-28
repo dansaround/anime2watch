@@ -73,7 +73,7 @@ export function HomeBanner({
                 objectFit="cover"
                 layout="fill"
                 className="scale-125"
-                src={anime.bannerImage || anime.coverImage.large}
+                src={anime.bannerImage || anime.coverImage.extraLarge}
                 alt="Hero Image"
               />
             ) : (

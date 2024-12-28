@@ -4,6 +4,7 @@ import { Text } from "@/app/components/Typography";
 import { useRecentAnimes } from "@/hooks/useRecentAnimes";
 import { AnimeCard } from "../../AnimeCard";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { FavCard } from "../../FavCard";
 
 export default function RecentsSection() {
   const {
@@ -25,7 +26,9 @@ export default function RecentsSection() {
         <ul className="flex overflow-x-auto gap-5 pb-2">
           {loading
             ? "Loading ..."
-            : animes.map((anime) => <AnimeCard key={anime.id} {...anime} />)}
+            : animes.map((anime, index) => (
+                <FavCard key={anime.id} anime={anime} index={index} />
+              ))}
         </ul>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>

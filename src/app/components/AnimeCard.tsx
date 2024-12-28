@@ -31,7 +31,7 @@ export function AnimeCard(anime: Anime) {
             <Image
               objectFit="cover"
               layout="fill"
-              src={anime.coverImage.large}
+              src={anime.coverImage.extraLarge}
               alt={`Cover image for ${
                 anime.title.english || anime.title.native
               }`}
@@ -48,8 +48,12 @@ export function AnimeCard(anime: Anime) {
 
           <div className="w-full flex justify-between items-center">
             <div className="w-full flex flex-col justify-end items-start">
-              <Text size="sm">{anime.startDate.year}</Text>
-              <Text size="sm">{anime.episodes} episodes</Text>
+              {anime.startDate ? (
+                <Text size="sm">{anime.startDate.year}</Text>
+              ) : null}
+              {anime.episodes ? (
+                <Text size="sm">{anime.episodes} episodes</Text>
+              ) : null}
             </div>
 
             <div className="self-end mb-1">
@@ -66,10 +70,10 @@ export function AnimeCard(anime: Anime) {
         onClick={(event) => handleClickOnFavorite(anime.id, event)}
       >
         <FaHeart
-          size={18}
+          size={24}
           className={classnames(
             favs.includes(anime.id) && "text-red-500",
-            "cursor-pointer transition-colors duration-300"
+            "cursor-pointer transition-colors duration-300 drop-shadow-md active:scale-90"
           )}
         />
       </button>

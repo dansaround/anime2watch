@@ -24,7 +24,7 @@ export const GET_PAGINATED_POPULAR_ANIMES = gql`
         episodes
         genres
         coverImage {
-          large
+          extraLarge
         }
         bannerImage
         averageScore
@@ -59,7 +59,7 @@ export const GET_PAGINATED_UPCOMING_ANIMES = gql`
         episodes
         genres
         coverImage {
-          large
+          extraLarge
         }
         bannerImage
       }
@@ -84,7 +84,7 @@ export const GET_HERO_SECTION_ANIMES = gql`
         averageScore
         bannerImage
         coverImage {
-          large
+          extraLarge
         }
         description
         startDate {
@@ -118,11 +118,127 @@ export const GET_PAGINATED_RECENT_ANIMES = gql`
           day
         }
         coverImage {
-          large
+          extraLarge
         }
         bannerImage
         description
         averageScore
+      }
+    }
+  }
+`;
+
+export const GET_ANIME_BY_ID = gql`
+  query GetAnimeById($id: Int!) {
+    Media(id: $id, type: ANIME) {
+      id
+      title {
+        romaji
+        english
+        native
+      }
+      description
+      episodes
+      duration
+      genres
+      averageScore
+      popularity
+      coverImage {
+        extraLarge
+      }
+      bannerImage
+      siteUrl
+    }
+  }
+`;
+
+export const GET_ANIMES_BY_IDS = gql`
+  query GetAnimesByIds($ids: [Int!]!) {
+    Page {
+      media(id_in: $ids, type: ANIME) {
+        id
+        title {
+          romaji
+          english
+          native
+        }
+        description
+        episodes
+        duration
+        genres
+        averageScore
+        popularity
+        startDate {
+          year
+          month
+          day
+        }
+        coverImage {
+          extraLarge
+        }
+        bannerImage
+        siteUrl
+      }
+    }
+  }
+`;
+
+export const SEARCH_ANIMES_BY_TITLE = gql`
+  query ($search: String, $page: Int, $perPage: Int) {
+    Page(page: $page, perPage: $perPage) {
+      media(search: $search, type: ANIME) {
+        id
+        title {
+          romaji
+          english
+          native
+        }
+        description
+        episodes
+        genres
+        averageScore
+        popularity
+        coverImage {
+          extraLarge
+        }
+        bannerImage
+        siteUrl
+      }
+    }
+  }
+`;
+
+export const GET_ANIMES_WITH_FILTERS = gql`
+  query GET_ANIMES_WITH_FILTERS(
+    $genders: [String!]
+    $ratingMin: Int
+    $ratingMax: Int
+    $statuses: [MediaStatus]
+    $page: Int
+    $perPage: Int
+  ) {
+    Page(page: $page, perPage: $perPage) {
+      media(
+        genre_in: $genders
+        averageScore_greater: $ratingMin
+        averageScore_lesser: $ratingMax
+        status_in: $statuses
+      ) {
+        id
+        title {
+          english
+          native
+        }
+        genres
+        averageScore
+        status
+        bannerImage
+      }
+      pageInfo {
+        total
+        currentPage
+        lastPage
+        hasNextPage
       }
     }
   }

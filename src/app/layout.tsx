@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ApolloProvider from "./ApolloProvider";
 import { ThemeProvider } from "next-themes";
+import Header from "./components/Header";
+import { Text } from "./components/Typography";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +28,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen relative`}
-      >
-        <ApolloProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
-          </ThemeProvider>
-        </ApolloProvider>
-      </body>
+      <ApolloProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen grid grid-rows-[4rem_1fr_3rem] relative w-scr max-w-full`}
+          >
+            <div className="w-full h-16">
+              <Header />
+            </div>
+
+            <main className="w-full h-full overflow-x-hidden">{children}</main>
+
+            <footer className="h-full p-4 w-full flex justify-center bg-yellow-400">
+              <Text.Bold size="base" className="text-black">
+                Made with ❤️ by Daniel Kcomt :D
+              </Text.Bold>
+            </footer>
+          </body>
+        </ThemeProvider>
+      </ApolloProvider>
     </html>
   );
 }
