@@ -62,7 +62,7 @@ This is a anime library project to showcase the usage of the following stack
 ### 8. Validations and Error handling
 
 - [ ] Validate user input and API response.
-- [ ] Loading feature and friendly error messages **mensajes informativos**.
+- [x] Loading feature and friendly error messages **mensajes informativos**.
 
 ### 9. Despliegue
 
@@ -74,5 +74,5 @@ This is a anime library project to showcase the usage of the following stack
 
 ## Extra:
 
-- [ ] Login feature using Clerk.
+- [x] Login feature using Clerk.
 - [ ] Profiles

@@ -16,10 +16,10 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-
+  const [search, setSearch] = useAtom(searchAtom);
   const router = useRouter();
 
-  const [search, setSearch] = useAtom(searchAtom);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,13 +76,15 @@ export default function Header() {
         </Link>
         <nav>
           <ul className="flex space-x-4">
-            <Link href="/favorites">
-              <Text size="lg">Favorites</Text>
-            </Link>
+            {pathname !== "/" && (
+              <Link href="/favorites">
+                <Text size="lg">Favorites</Text>
+              </Link>
+            )}
           </ul>
         </nav>
       </div>
-      <div className="flex items-center gap-4 ">
+      <div className="flex justify-end items-center gap-4 ">
         <div className="flex justify-end gap-4 w-64 ">
           {isSearching ? (
             <motion.div
@@ -130,9 +132,9 @@ export default function Header() {
             </button>
           )}
         </div>
-        <div className="flex items-center w-48">
+        <div className="flex items-center ">
           <SignedOut>
-            <div>
+            <div className="flex items-center justify-center">
               <SignInButton />
             </div>
           </SignedOut>
