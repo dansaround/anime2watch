@@ -66,7 +66,7 @@ This is a anime library project to showcase the usage of the following stack
 
 ### 9. Despliegue
 
-- [ ] Desploy on Vercel.
+- [x] Desploy on Vercel.
 
 ### 10. Documentación
 

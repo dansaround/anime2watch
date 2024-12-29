@@ -1,25 +1,22 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/app/assets/logo.png";
-import { Text } from "./Typography";
-import { PrimaryButton } from "./Button/PrimaryButton";
-import { useEffect, useState } from "react";
-import classNames from "classnames";
-import { FaSearch } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { SearchInput } from "@/components/SearchInput";
-import { searchAtom } from "../states/search-state";
 import { useAtom } from "jotai";
-import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Text } from "./Typography";
+import classNames from "classnames";
+import { motion } from "framer-motion";
+import { FaSearch } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { searchAtom } from "../states/search-state";
+import { PrimaryButton } from "./Button/PrimaryButton";
+import { usePathname, useRouter } from "next/navigation";
+import { SearchInput } from "@/components/ui/SearchInput";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
   const router = useRouter();
-  const pathname = usePathname();
 
   const [search, setSearch] = useAtom(searchAtom);
 

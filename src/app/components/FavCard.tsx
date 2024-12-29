@@ -51,7 +51,7 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
             )}
           </div>
 
-          <div className="absolute inset-0 bg-black/70 p-4 flex flex-col justify-between">
+          <div className="absolute inset-0 bg-black/70 hover:bg-black/10 transition-all duration-[250ms] p-4 flex flex-col justify-between">
             <div>
               <Text.Bold size="xl" className="text-lg font-bold">
                 {formatTitle(
@@ -73,7 +73,7 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
                   size={20}
                   className={classnames(
                     favs.includes(anime.id) && "text-red-500",
-                    "cursor-pointer transition-colors duration-300 drop-shadow-md active:scale-90"
+                    "cursor-pointer transition-colors duration-300 drop-shadow-md hover:scale-110 active:scale-95"
                   )}
                 />
               </button>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ApolloProvider from "./ApolloProvider";
+import ApolloProvider from "@/app/utils/ApolloProvider";
 import { ThemeProvider } from "next-themes";
 import Header from "./components/Header";
 import { Text } from "./components/Typography";
