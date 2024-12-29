@@ -1,6 +1,6 @@
 import Link from "next/link";
 import cn from "classnames";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Anime } from "@/lib/types";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";

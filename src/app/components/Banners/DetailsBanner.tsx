@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { FaHeart } from "react-icons/fa";
 import { useFavorites } from "@/hooks/useFavorites";
 import classNames from "classnames";
