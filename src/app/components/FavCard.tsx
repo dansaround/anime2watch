@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import classnames from "classnames";
 import { Text } from "./Typography";
 import { Anime } from "@/lib/types";
@@ -24,7 +24,7 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
   };
 
   return (
-    <motion.li
+    (<motion.li
       className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative"
       initial={{ opacity: 0, y: 50 }} // Initial state: transparent and below
       animate={{ opacity: 1, y: 0 }} // Final state: visible and at position
@@ -39,13 +39,15 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
           <div className="absolute inset-0">
             {anime.coverImage ? (
               <Image
-                objectFit="cover"
-                layout="fill"
                 src={anime.coverImage.extraLarge}
                 alt={`Cover image for ${
                   anime.title.english || anime.title.native
                 }`}
-              />
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "cover"
+                }} />
             ) : (
               <div className="w-full h-full bg-black" />
             )}
@@ -89,6 +91,6 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
           </div>
         </Link>
       </div>
-    </motion.li>
+    </motion.li>)
   );
 }

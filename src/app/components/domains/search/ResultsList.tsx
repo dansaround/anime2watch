@@ -1,6 +1,6 @@
 import Link from "next/link";
 import cn from "classnames";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Anime } from "@/lib/types";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
@@ -47,7 +47,7 @@ function ResultCard({ result, index }: ResultProps) {
   const { favs, handleFavorite } = useFavorites();
 
   return (
-    <motion.li
+    (<motion.li
       className="relative w-48 h-72 rounded-md shadow-md overflow-hidden"
       initial={{ opacity: 0, y: 50 }} // Initial state: transparent and below
       animate={{ opacity: 1, y: 0 }} // Final state: visible and at position
@@ -60,13 +60,15 @@ function ResultCard({ result, index }: ResultProps) {
       <Link href={`/details/${result.id}`}>
         <div className="relative w-full h-full">
           <Image
-            layout="fill"
-            objectFit="cover"
             placeholder="blur"
             src={result.coverImage.extraLarge}
             blurDataURL={placeholderImageBase64}
             alt={result.title.english || result.title.native || "Image"}
-          />
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover"
+            }} />
 
           <div className="w-full h-full bg-gradient-to-t from-black/80 to-transparent absolute top-0 left-0 p-2 flex items-end justify-start">
             <Text.Bold size="lg">
@@ -75,7 +77,6 @@ function ResultCard({ result, index }: ResultProps) {
           </div>
         </div>
       </Link>
-
       <button
         className="absolute top-1 right-1 p-2"
         onClick={(event) => handleFavorite(result.id)}
@@ -88,6 +89,6 @@ function ResultCard({ result, index }: ResultProps) {
           )}
         />
       </button>
-    </motion.li>
+    </motion.li>)
   );
 }

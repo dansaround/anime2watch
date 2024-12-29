@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { Anime } from "@/lib/types";
 import { Text } from "../Typography";
@@ -70,12 +70,14 @@ export function HomeBanner({
           >
             {anime.bannerImage ? (
               <Image
-                objectFit="cover"
-                layout="fill"
                 className="scale-125"
                 src={anime.bannerImage || anime.coverImage.extraLarge}
                 alt="Hero Image"
-              />
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "cover"
+                }} />
             ) : (
               <div className="w-full h-full bg-gray-800" />
             )}

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import classnames from "classnames";
 import { Text } from "./Typography";
 import { Anime } from "@/lib/types";
@@ -21,7 +21,7 @@ export function AnimeCard(anime: Anime) {
   };
 
   return (
-    <li className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative ">
+    (<li className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative ">
       <Link
         href={`/details/${anime.id}`}
         className="grid grid-rows-[208px_1fr] h-full"
@@ -29,13 +29,15 @@ export function AnimeCard(anime: Anime) {
         <div className="h-52 relative">
           {anime.coverImage ? (
             <Image
-              objectFit="cover"
-              layout="fill"
               src={anime.coverImage.extraLarge}
               alt={`Cover image for ${
                 anime.title.english || anime.title.native
               }`}
-            />
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: "cover"
+              }} />
           ) : (
             <div className="w-full h-full bg-black" />
           )}
@@ -64,7 +66,6 @@ export function AnimeCard(anime: Anime) {
           </div>
         </section>
       </Link>
-
       <button
         className="absolute top-2 right-2"
         onClick={(event) => handleClickOnFavorite(anime.id, event)}
@@ -77,6 +78,6 @@ export function AnimeCard(anime: Anime) {
           )}
         />
       </button>
-    </li>
+    </li>)
   );
 }
