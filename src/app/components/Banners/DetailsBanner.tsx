@@ -12,16 +12,17 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
   const { favs, handleFavorite } = useFavorites();
 
   return (
-    (<div className="w-full bg-red-400 min-h-96 relative">
+    <div className="w-full bg-red-400 min-h-96 relative">
       <div className="w-full h-full absolute left-0 top-0">
         <Image
           src={anime.bannerImage || anime.coverImage.extraLarge}
           alt="Hero Image"
           fill
-          sizes="100vw"
+          sizes="(max-width: 1200px) 50vw"
           style={{
-            objectFit: "cover"
-          }} />
+            objectFit: "cover",
+          }}
+        />
       </div>
       <div className="absolute w-full h-full z-10 bg-gradient-to-t from-black/70 to-transparent  items-center justify-evenly grid grid-cols-[1fr_0.3fr] px-64 ">
         <div className="flex gap-2">
@@ -57,6 +58,6 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
           />
         </div>
       </div>
-    </div>)
+    </div>
   );
 }

@@ -6,7 +6,6 @@ import { AnimeCard } from "../../AnimeCard";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SkeletonRectangle } from "../../SkeletonRectangle";
 import { FavCard } from "../../FavCard";
-import { toast } from "sonner";
 
 export default function PopularSection() {
   const {
@@ -23,19 +22,7 @@ export default function PopularSection() {
 
   return (
     <div className="flex flex-col gap-4">
-      <button
-        onClick={() =>
-          toast("Event has been created", {
-            description: "Sunday, December 03, 2023 at 9:00 AM",
-            action: {
-              label: "Undo",
-              onClick: () => console.log("Undo"),
-            },
-          })
-        }
-      >
-        <Text.Bold size="2xl">Popular</Text.Bold>
-      </button>
+      <Text.Bold size="2xl">Popular</Text.Bold>
       <ScrollArea className="w-full whitespace-nowrap">
         <ul className="flex overflow-x-auto gap-5 pb-4 h-full">
           {loading

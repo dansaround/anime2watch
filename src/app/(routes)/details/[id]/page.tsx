@@ -18,10 +18,7 @@ export default function DetailsPage() {
   });
 
   useEffect(() => {
-    console.log("useffecting");
-  }, []);
-  useEffect(() => {
-    if (true) {
+    if (error) {
       toast.error("Ups, something went wrong", {
         description: "Anilist server is down ): lease try again later",
         action: {
@@ -30,7 +27,8 @@ export default function DetailsPage() {
         },
       });
     }
-  }, []);
+    console.log("useffecting at details page");
+  }, [error]);
 
   return loading ? (
     <SkeletonRectangle className="w-full h-[200px]" />

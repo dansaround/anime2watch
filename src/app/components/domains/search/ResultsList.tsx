@@ -47,8 +47,8 @@ function ResultCard({ result, index }: ResultProps) {
   const { favs, handleFavorite } = useFavorites();
 
   return (
-    (<motion.li
-      className="relative w-48 h-72 rounded-md shadow-md overflow-hidden"
+    <motion.li
+      className="relative w-48 h-72 rounded-md shadow-md overflow-hidden "
       initial={{ opacity: 0, y: 50 }} // Initial state: transparent and below
       animate={{ opacity: 1, y: 0 }} // Final state: visible and at position
       transition={{
@@ -65,12 +65,13 @@ function ResultCard({ result, index }: ResultProps) {
             blurDataURL={placeholderImageBase64}
             alt={result.title.english || result.title.native || "Image"}
             fill
-            sizes="100vw"
+            sizes="(max-width: 1200px) 50vw"
             style={{
-              objectFit: "cover"
-            }} />
+              objectFit: "cover",
+            }}
+          />
 
-          <div className="w-full h-full bg-gradient-to-t from-black/80 to-transparent absolute top-0 left-0 p-2 flex items-end justify-start">
+          <div className="w-full h-full bg-gradient-to-t from-black/80 to-transparent transition-all duration-400 absolute top-0 left-0 p-2 flex items-end justify-start hover:from-black/30 hover:to-transparent ">
             <Text.Bold size="lg">
               {result.title.english || result.title.native}
             </Text.Bold>
@@ -82,13 +83,13 @@ function ResultCard({ result, index }: ResultProps) {
         onClick={(event) => handleFavorite(result.id)}
       >
         <FaHeart
-          size={18}
+          size={30}
           className={cn(
             favs.includes(result.id) && "text-red-500",
             "cursor-pointer transition-colors duration-300"
           )}
         />
       </button>
-    </motion.li>)
+    </motion.li>
   );
 }

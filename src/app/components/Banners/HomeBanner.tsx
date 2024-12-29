@@ -74,10 +74,11 @@ export function HomeBanner({
                 src={anime.bannerImage || anime.coverImage.extraLarge}
                 alt="Hero Image"
                 fill
-                sizes="100vw"
+                sizes="(max-width: 1200px) 50vw"
                 style={{
-                  objectFit: "cover"
-                }} />
+                  objectFit: "cover",
+                }}
+              />
             ) : (
               <div className="w-full h-full bg-gray-800" />
             )}

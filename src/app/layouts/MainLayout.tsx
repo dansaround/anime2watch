@@ -6,16 +6,15 @@ import StarSelector from "../components/domains/home/StarSelector";
 import GenereSelector from "../components/domains/home/GenereSelector";
 import StatusSelector from "../components/domains/home/StatusSelector";
 import { Text } from "../components/Typography";
-import { PrimaryButton } from "../components/Button/PrimaryButton";
 import { GET_HERO_SECTION_ANIMES } from "@/lib/queries";
 import { useQuery } from "@apollo/client";
 import { shuffle } from "lodash";
-import { SkeletonRectangle } from "../components/SkeletonRectangle";
 import { useAtom } from "jotai";
 import { filtersStateAtom } from "@/app/states/filters-state";
 import { useFilteredAnimes } from "@/hooks/useFiltersAnimes";
 import { Anime } from "@/lib/types";
 import { toast, Toaster } from "sonner";
+import { useEffect } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,20 +51,24 @@ export default function MainLayout({
       : [];
   };
 
+  useEffect(() => {
+    if (error) {
+      toast.error("Ups, something went wrong", {
+        description: "Anilist server is down ): lease try again later",
+        action: {
+          label: "Close",
+          onClick: () => console.log("Closed error notification"),
+        },
+      });
+    }
+    console.log("useffecting at search page");
+  }, [error]);
+
   return (
     <div className="antialiased h-full flex flex-col bg-gray-100 relative">
       <div className="min-h-96 -mt-16">
         <HomeBanner animes={getHeroAnimes()} isLoading={loading} />
       </div>
-      {error &&
-        toast.error("Ups, something went wrong", {
-          description:
-            "It appears that the server is down, please try again later",
-          action: {
-            label: "Close",
-            onClick: () => console.log("Closd error notification"),
-          },
-        })}
 
       <Toaster position="top-center" richColors />
 

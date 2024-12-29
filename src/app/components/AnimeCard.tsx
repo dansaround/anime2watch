@@ -21,7 +21,7 @@ export function AnimeCard(anime: Anime) {
   };
 
   return (
-    (<li className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative ">
+    <li className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative ">
       <Link
         href={`/details/${anime.id}`}
         className="grid grid-rows-[208px_1fr] h-full"
@@ -34,10 +34,11 @@ export function AnimeCard(anime: Anime) {
                 anime.title.english || anime.title.native
               }`}
               fill
-              sizes="100vw"
+              sizes="(max-width: 1200px) 50vw"
               style={{
-                objectFit: "cover"
-              }} />
+                objectFit: "cover",
+              }}
+            />
           ) : (
             <div className="w-full h-full bg-black" />
           )}
@@ -78,6 +79,6 @@ export function AnimeCard(anime: Anime) {
           )}
         />
       </button>
-    </li>)
+    </li>
   );
 }

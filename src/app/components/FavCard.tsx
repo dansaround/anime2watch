@@ -1,15 +1,14 @@
 "use client";
+import Score from "./Score";
 import Link from "next/link";
 import Image from "next/image";
 import classnames from "classnames";
 import { Text } from "./Typography";
 import { Anime } from "@/lib/types";
+import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { formatTitle } from "../utils/formatTitle";
 import { useFavorites } from "@/hooks/useFavorites";
-import Score from "./Score";
-import { motion } from "framer-motion";
-import { PrimaryButton } from "./Button/PrimaryButton";
 
 export function FavCard({ anime, index }: { anime: Anime; index: number }) {
   const { favs, handleFavorite } = useFavorites();
@@ -24,7 +23,7 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
   };
 
   return (
-    (<motion.li
+    <motion.li
       className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative"
       initial={{ opacity: 0, y: 50 }} // Initial state: transparent and below
       animate={{ opacity: 1, y: 0 }} // Final state: visible and at position
@@ -35,7 +34,7 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
       }}
     >
       <div className="bg-neutral-800 shadow-md rounded-lg overflow-hidden h-[350px] min-w-56 relative">
-        <Link href={`/details/${anime.id}`} className="block w-full h-full">
+        <div className="block w-full h-full">
           <div className="absolute inset-0">
             {anime.coverImage ? (
               <Image
@@ -44,10 +43,11 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
                   anime.title.english || anime.title.native
                 }`}
                 fill
-                sizes="100vw"
+                sizes="(max-width: 1200px) 50vw"
                 style={{
-                  objectFit: "cover"
-                }} />
+                  objectFit: "cover",
+                }}
+              />
             ) : (
               <div className="w-full h-full bg-black" />
             )}
@@ -89,8 +89,8 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
               </Link>
             </div>
           </div>
-        </Link>
+        </div>
       </div>
-    </motion.li>)
+    </motion.li>
   );
 }
