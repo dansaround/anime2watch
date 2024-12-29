@@ -11,6 +11,7 @@ import { searchAtom } from "../states/search-state";
 import { PrimaryButton } from "./Button/PrimaryButton";
 import { usePathname, useRouter } from "next/navigation";
 import { SearchInput } from "@/components/ui/SearchInput";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -130,7 +131,14 @@ export default function Header() {
           )}
         </div>
         <div className="flex items-center w-48">
-          <PrimaryButton>Sign In</PrimaryButton>
+          <SignedOut>
+            <div>
+              <SignInButton />
+            </div>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
     </header>
