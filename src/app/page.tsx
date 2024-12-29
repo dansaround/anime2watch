@@ -69,7 +69,9 @@ export default function StartPage() {
             <CardFooter className="flex flex-col  gap-1">
               <SignedOut>
                 <div className="text-sm text-center text-muted-foreground">
-                  <Text>Don't want to log in? No worries, it's optional. </Text>
+                  <Text>
+                    {"Don't want to log in? No worries, it's optional."}
+                  </Text>
                 </div>
                 <Link
                   href="/home"

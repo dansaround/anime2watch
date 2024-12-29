@@ -8,6 +8,7 @@ import { GetPaginatedRecentAnimesInterface } from "@/lib/types";
 import { FavCard } from "@/app/components/FavCard";
 import { toast, Toaster } from "sonner";
 import { useEffect } from "react";
+import { clerkClient } from "@clerk/nextjs/server";
 
 export default function Favorites() {
   const { favs } = useFavorites();
