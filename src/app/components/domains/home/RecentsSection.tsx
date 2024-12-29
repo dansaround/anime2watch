@@ -21,7 +21,9 @@ export default function RecentsSection() {
 
   return (
     <div className="flex flex-col gap-4">
-      <Text.Bold size="2xl">Recents (2024)</Text.Bold>
+      <Text.Bold size="2xl" className="text-yellow-500">
+        Recents (2024)
+      </Text.Bold>
       <ScrollArea className="w-full whitespace-nowrap">
         <ul className="flex overflow-x-auto gap-5 pb-2">
           {loading

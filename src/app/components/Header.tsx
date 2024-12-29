@@ -65,27 +65,29 @@ export default function Header() {
             ? "bg-gradient-to-b from-black/60 to-transparent"
             : "bg-black"
         }`,
-        "flex justify-between h-16 items-center px-20 z-20"
+        "flex justify-between h-16 items-center px-10  md:px-20 z-20"
       )}
     >
-      <div className="flex items-center gap-12 ">
+      <div className="flex items-center gap-12 pr-2">
         <Link href="/home">
-          <Text.Bold size="xl" className={classNames(` text-white`)}>
-            Anime2Watch {isScrolled ? "🔥" : ""}
+          <Text.Bold size="xl" className={cn(`text-white text-xs md:text-lg`)}>
+            Anime2Watch
           </Text.Bold>
         </Link>
-        <nav>
+        <nav className={cn(!isSearching ? "block" : "hidden")}>
           <ul className="flex space-x-4">
             {pathname !== "/" && (
               <Link href="/favorites">
-                <Text size="lg">Favorites</Text>
+                <Text size="lg" className={cn(`text-white text-xs md:text-lg`)}>
+                  Favorites
+                </Text>
               </Link>
             )}
           </ul>
         </nav>
       </div>
-      <div className="flex justify-end items-center gap-4 ">
-        <div className="flex justify-end gap-4 w-64 ">
+      <div className="flex justify-end items-center gap-2 sm:gap-4">
+        <div className="flex justify-end gap-2 sm:gap-4 w-auto sm:w-64">
           {isSearching ? (
             <motion.div
               initial={{
@@ -134,7 +136,7 @@ export default function Header() {
         </div>
         <div className="flex items-center ">
           <SignedOut>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center border border-zinc-300 rounded-full p-2">
               <SignInButton />
             </div>
           </SignedOut>

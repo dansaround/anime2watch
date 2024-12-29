@@ -21,7 +21,9 @@ export default function UpcomingSection() {
 
   return (
     <div className="flex flex-col gap-4">
-      <Text.Bold size="2xl">Upcoming</Text.Bold>
+      <Text.Bold size="2xl" className="text-yellow-500">
+        Upcoming
+      </Text.Bold>
       <ScrollArea className="w-full whitespace-nowrap">
         <ul className="flex overflow-x-auto gap-5 pb-4">
           {loading

@@ -48,7 +48,7 @@ export function HomeBanner({
   const anime = animes[currentIndex];
 
   return isLoading || !anime ? null : (
-    <div className="relative w-full bg-black min-h-96 pt-6 overflow-hidden">
+    <div className="relative w-full bg-black min-h-[300px] sm:min-h-96 pt-6 overflow-hidden">
       <AnimatePresence>
         <motion.div
           key={anime.id}
@@ -85,26 +85,29 @@ export function HomeBanner({
           </motion.div>
 
           {/* Overlay content */}
-          <div className="absolute w-full h-full z-10 bg-gradient-to-t from-black/100 to-transparent px-24 items-end justify-evenly grid grid-cols-[1fr_0.1fr] pb-24">
+          <div className="absolute w-full h-full z-10 bg-gradient-to-t from-black/100 to-transparent px-4 sm:px-8 md:px-16 lg:px-24 items-end justify-evenly grid grid-cols-1 sm:grid-cols-[1fr_0.1fr] pb-16 sm:pb-24">
             <motion.div
               initial={{ y: "100%" }} // Start below the viewport
               animate={{ y: "0%" }} // Slide up into view
               exit={{ y: "-100%" }} // Slide up out of view
               transition={{ duration: 2 }} // Matches fade duration
-              className="flex flex-col gap-2 scale-90"
+              className="flex flex-col gap-2 scale-100 sm:scale-90"
             >
               {/* Anime title */}
-              <Text.Bold size="5xl" className="text-4xl font-bold text-white">
+              <Text.Bold
+                size="5xl"
+                className="text-xl sm:text-3xl md:text-4xl font-bold text-white"
+              >
                 {anime.title.english || anime.title.native}
               </Text.Bold>
 
               {/* Anime description */}
               <div
-                className="w-[40%] max-h-[100px] overflow-hidden"
+                className="w-1/2 sm:w-[60%] md:w-[70%] lg:w-[80%] max-h-[60px] sm:max-h-[100px] overflow-hidden text-sm sm:text-base text-ellipsis"
                 dangerouslySetInnerHTML={{ __html: anime.description }}
               />
 
-              <div className="w-[40%] flex items-center justify-start gap-10 mt-2">
+              <div className="scale-90 -ml-3  sm:-ml-0 sm:scale-100 w-1/2 sm:w-[60%] md:w-[50%] lg:w-[40%] flex items-center justify-start gap-4 sm:gap-10 mt-2">
                 <Link
                   href={`/details/${anime.id}`}
                   className="flex justify-center"
@@ -129,12 +132,12 @@ export function HomeBanner({
       </AnimatePresence>
 
       {/* Carousel dots */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+      <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1 sm:gap-2 z-10">
         {animes.map((_, index) => (
           <div
             key={index}
-            onClick={() => handleDotClick(index)} // Handle click on a dot
-            className={`w-3 h-3 rounded-full cursor-pointer ${
+            onClick={() => handleDotClick(index)}
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer ${
               index === currentIndex ? "bg-white" : "bg-gray-500"
             }`}
           />

@@ -7,27 +7,35 @@ import classNames from "classnames";
 import { Anime } from "@/lib/types";
 import { ChartRating } from "../ChartRating";
 import { GenresTooltip } from "../GenresTooltip";
+import { cn } from "@/lib/utils";
+import { Text } from "../Typography";
 
 export function DetailsBanner({ anime }: { anime: Anime }) {
   const { favs, handleFavorite } = useFavorites();
 
   return (
-    <div className="w-full bg-red-400 min-h-96 relative">
-      <div className="w-full h-full absolute left-0 top-0">
+    <div className="w-full  md:min-h-96 md:relative flex flex-col">
+      <div className="w-full h-2/5 md:h-full md:absolute md:left-0 md:top-0 flex flex-col items-center justify-center">
         <Image
           src={anime.bannerImage || anime.coverImage.extraLarge}
           alt="Hero Image"
           fill
-          sizes="(max-width: 1200px) 50vw"
+          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           style={{
             objectFit: "cover",
+            objectPosition: "center",
           }}
         />
       </div>
-      <div className="absolute w-full h-full z-10 bg-gradient-to-t from-black/70 to-transparent  items-center justify-evenly grid grid-cols-[1fr_0.3fr] px-64 ">
-        <div className="flex gap-2">
-          <div>
-            <h2 className="text-4xl font-bold text-white  ">
+      <div
+        className={cn(
+          "absolute h-full z-10 bg-gradient-to-t from-black/80 to-transparent flex items-center justify-evenly  p-10 xl:px-64 "
+        )}
+      >
+        <div className="flex flex-col h-full md:flex-row gap-2 ">
+          <div className="h-full">
+            <h2 className="text-4xl font-bold text-yellow-400  ">
               {anime.title.english || anime.title.native}
             </h2>
             <span className="text-wrap">
@@ -37,7 +45,10 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
               <GenresTooltip anime={anime} />
             </div>
           </div>
-          <div className="pr-44 flex justify-center items-center ">
+          <div className=" flex justify-center items-center gap-3">
+            <Text.Bold size="xl" className="md:hidden ">
+              Add to favorites:{" "}
+            </Text.Bold>
             <button>
               <FaHeart
                 size={40}
@@ -50,12 +61,12 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
               />
             </button>
           </div>
-        </div>
-        <div className=" flex justify-center">
-          <ChartRating
-            likes={anime.averageScore || 0}
-            dislikes={100 - (anime.averageScore || 0)}
-          />
+          <div className=" min-w-[200px] md:min-w-[300px] md:scale-75 mx-auto">
+            <ChartRating
+              likes={anime.averageScore || 0}
+              dislikes={100 - (anime.averageScore || 0)}
+            />
+          </div>
         </div>
       </div>
     </div>

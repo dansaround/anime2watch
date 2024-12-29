@@ -233,6 +233,9 @@ export const GET_ANIMES_WITH_FILTERS = gql`
         averageScore
         status
         bannerImage
+        coverImage {
+          extraLarge
+        }
       }
       pageInfo {
         total

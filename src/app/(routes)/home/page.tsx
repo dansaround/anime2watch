@@ -10,10 +10,12 @@ import FilteredAnimesList from "@/app/components/domains/home/FilteredAnimesList
 export type AnimeProps = (typeof data.Page.media)[0];
 
 export default function HomePage() {
-  const { hasFiltersApplied } = useFilteredAnimes({ perPage: 10 });
+  const { hasFiltersApplied, error } = useFilteredAnimes({
+    perPage: 10,
+  });
 
   return (
-    <div className="max-w-full overflow-x-hidden flex flex-col">
+    <div className="max-w-full min-h-full overflow-x-hidden flex flex-col">
       {!hasFiltersApplied && (
         <div className="flex flex-col space-y-4 gap-8 justify-start p-6 ">
           <PopularSection />

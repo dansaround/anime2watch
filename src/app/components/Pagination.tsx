@@ -47,7 +47,7 @@ export function Pagination({
             key={index}
             onClick={() => {
               onPageChange(page);
-              console.log("las páginas a cambiar :\n", page, currentPage);
+              console.log("las páginas a cambiar de a: :\n", currentPage, page);
             }}
             className={`px-2 py-1 ${
               page === currentPage ? "font-bold underline" : ""

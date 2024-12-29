@@ -1,18 +1,37 @@
 import { Text } from "@/app/components/Typography";
 import { useFilteredAnimes } from "@/hooks/useFiltersAnimes";
 import { Pagination } from "../../Pagination";
+import ResultsList from "../search/ResultsList";
+import { useEffect } from "react";
+import { toast, Toaster } from "sonner";
+import { SkeletonRectangle } from "../../SkeletonRectangle";
+import { FavCard } from "../../FavCard";
 
 export default function FilteredAnimesList() {
   const {
-    loading,
+    error,
     animes,
-    totalResults,
-    currentPage,
-    lastPage,
-    hasNextPage,
-    pagesToRender,
+    loading,
     setPage,
+    lastPage,
+    currentPage,
+    hasNextPage,
+    totalResults,
+    pagesToRender,
   } = useFilteredAnimes({ perPage: 10 });
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Ups, something went wrong", {
+        description: "Anilist server is down ): lease try again later",
+        action: {
+          label: "Close",
+          onClick: () => console.log("Closed error notification"),
+        },
+      });
+    }
+    console.log("useffecting at HomePage/filteredAnimeList page");
+  }, [error]);
 
   if (loading) {
     return <Text.Semibold>Loading...</Text.Semibold>;
@@ -21,6 +40,7 @@ export default function FilteredAnimesList() {
   return (
     <div className="mt-4">
       <Text.Bold>{totalResults} results </Text.Bold>
+      <Toaster position="top-center" richColors />
 
       <Pagination
         lastPage={lastPage}
@@ -30,10 +50,14 @@ export default function FilteredAnimesList() {
         pagesToRender={pagesToRender}
       />
 
-      <ul className="flex flex-col gap-4 mt-10">
-        {animes.map((anime) => (
-          <li key={anime.id}>{anime.title.english || anime.title.native}</li>
-        ))}
+      <ul className="flex items-center flex-wrap gap-6 mt-6">
+        {loading
+          ? Array.from({ length: 5 }).map((_, index) => (
+              <SkeletonRectangle key={index} className="w-52 h-80 rounded-md" />
+            ))
+          : animes?.map((anime, index) => (
+              <FavCard key={anime.id} anime={anime} index={index} />
+            ))}
       </ul>
     </div>
   );

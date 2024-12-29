@@ -8,10 +8,12 @@ import { GetPaginatedRecentAnimesInterface } from "@/lib/types";
 import { FavCard } from "@/app/components/FavCard";
 import { toast, Toaster } from "sonner";
 import { useEffect } from "react";
-import { clerkClient } from "@clerk/nextjs/server";
+import { useUser } from "@clerk/nextjs";
 
 export default function Favorites() {
   const { favs } = useFavorites();
+
+  const { isSignedIn, user, isLoaded } = useUser();
 
   const { data, loading, error } = useQuery<GetPaginatedRecentAnimesInterface>(
     GET_ANIMES_BY_IDS,
@@ -24,7 +26,7 @@ export default function Favorites() {
   );
 
   useEffect(() => {
-    if (error) {
+    if (error !== undefined) {
       toast.error("Ups, something went wrong", {
         description: "Anilist server is down ): lease try again later",
         action: {
@@ -32,13 +34,9 @@ export default function Favorites() {
           onClick: () => console.log("Closed error notification"),
         },
       });
+      console.log("Error fetching data at favorites");
     }
-    console.log("Error fetching data at favorites");
   }, []);
-
-  if (typeof window === "undefined") {
-    return null;
-  }
 
   if (!favs.length) {
     return (
@@ -49,12 +47,13 @@ export default function Favorites() {
   }
 
   return (
-    <div className=" lg:w-3/4 md:w-3/4 sm:w-1/2 pb-2 px-4 mx-auto">
+    <div className=" lg:w-3/4 md:w-3/4 pb-2 px-4 mx-auto">
       <Toaster position="top-center" richColors />
       <Text.Bold size="2xl" className="text-yellow-400 pr-14">
-        {"Animes you've favorited"}
+        {"Animes you've favorited "}
+        {isSignedIn && `${user?.fullName}`}
       </Text.Bold>
-      <ul className="flex items-center lg:justify-start sm:justify-center flex-wrap gap-6 mt-6">
+      <ul className="flex items-center justify-center sm:justify-start   flex-wrap gap-6 mt-6">
         {loading
           ? Array.from({ length: 5 }).map((_, index) => (
               <SkeletonRectangle key={index} className="w-52 h-80 rounded-md" />

@@ -21,7 +21,7 @@ interface ResultProps {
 
 export default function ResultsList({ results, isLoading }: ResultsListProps) {
   return (
-    <div className="w- pb-2">
+    <div className=" pb-2">
       <ul className="flex items-center flex-wrap gap-6 mt-6">
         {isLoading ? (
           Array.from({ length: 16 }).map((_, index) => (

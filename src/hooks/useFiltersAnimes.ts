@@ -14,41 +14,15 @@ export function useFilteredAnimes({ perPage = 5 }: { perPage?: number }) {
   const [page, setPage] = useState(1); // Current page
   const [totalResults, setTotalResults] = useState<number | null>(null); // Store total results initially
 
-  const [variables, setVariables] = useState<
-    Record<string, string | string[] | number>
-  >({
-    page,
-    perPage,
-  });
-
-  useEffect(() => {
-    setPage(1);
-
-    const newVariables = { ...variables };
-
-    if (filters.genders.length) {
-      newVariables.genders = filters.genders;
-    }
-
-    if (filters.rating !== null) {
-      const thresholdStep = 20; // Define step range for ratings
-      newVariables.ratingMin = filters.rating - thresholdStep;
-      newVariables.ratingMax = filters.rating;
-    }
-
-    if (filters.statuses.length) {
-      newVariables.status = filters.statuses;
-    }
-
-    setVariables(newVariables);
-  }, [filters]);
-
-  useEffect(() => {
-    console.log({ variables });
-  }, [variables]);
-
   const { loading, error, data } = useQuery(GET_ANIMES_WITH_FILTERS, {
-    variables,
+    variables: {
+      page,
+      perPage,
+      genders: filters.genders.length ? filters.genders : undefined,
+      ratingMin: filters.rating !== null ? filters.rating - 20 : undefined,
+      ratingMax: filters.rating !== null ? filters.rating : undefined,
+      statuses: filters.statuses.length ? filters.statuses : undefined,
+    },
   });
 
   // Extract pageInfo from the query response

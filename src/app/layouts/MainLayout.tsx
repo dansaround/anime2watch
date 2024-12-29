@@ -1,20 +1,17 @@
 "use client";
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { HomeBanner } from "../components/Banners/HomeBanner";
-import StarSelector from "../components/domains/home/StarSelector";
-import GenereSelector from "../components/domains/home/GenereSelector";
-import StatusSelector from "../components/domains/home/StatusSelector";
-import { Text } from "../components/Typography";
-import { GET_HERO_SECTION_ANIMES } from "@/lib/queries";
-import { useQuery } from "@apollo/client";
 import { shuffle } from "lodash";
-import { useAtom } from "jotai";
-import { filtersStateAtom } from "@/app/states/filters-state";
-import { useFilteredAnimes } from "@/hooks/useFiltersAnimes";
 import { Anime } from "@/lib/types";
+import type { Metadata } from "next";
 import { toast, Toaster } from "sonner";
+import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
+import { Geist, Geist_Mono } from "next/font/google";
+import { GET_HERO_SECTION_ANIMES } from "@/lib/queries";
+
+import { HomeBanner } from "../components/Banners/HomeBanner";
+
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Sidebar } from "../components/domains/home/Sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,52 +63,23 @@ export default function MainLayout({
 
   return (
     <div className="antialiased h-full flex flex-col bg-gray-100 relative">
-      <div className="min-h-96 -mt-16">
-        <HomeBanner animes={getHeroAnimes()} isLoading={loading} />
-      </div>
-
-      <Toaster position="top-center" richColors />
-
-      <div className="flex-grow">
-        <div className="grid grid-cols-[1.2fr_6fr] h-full bg-yellow-300">
-          <Sidebar />
-          <main className="bg-black w-full overflow-x-hidden ">{children}</main>
+      <ScrollArea className="w-full h-full bg-black">
+        <div className="sm:min-h-96 -mt-2 sm:-mt-16">
+          <HomeBanner animes={getHeroAnimes()} isLoading={loading} />
         </div>
-      </div>
+
+        <Toaster position="top-center" richColors />
+
+        <div className="flex-grow">
+          <div className="grid md:grid-cols-[1.4fr_6fr] h-full bg-yellow-300">
+            <Sidebar />
+            <main className="bg-black w-full h-full overflow-x-hidden ">
+              {children}
+            </main>
+          </div>
+        </div>
+        <ScrollBar orientation="vertical" />
+      </ScrollArea>
     </div>
-  );
-}
-
-function Sidebar() {
-  const [filters, setFilters] = useAtom(filtersStateAtom);
-
-  const { hasFiltersApplied, resetFilters } = useFilteredAnimes({});
-
-  return (
-    <aside className="bg-black w-full h-full flex flex-col pt-3 px-3 gap-3">
-      <section className=" flex flex-col pt-3 px-3 gap-3">
-        <div className="flex justify-between items-center mb-5">
-          <Text.Bold size="xl" className="pb-2 text-center text-yellow-400">
-            Filters
-          </Text.Bold>
-
-          {hasFiltersApplied && (
-            <button className="scale-75" onClick={resetFilters}>
-              <Text.Semibold className="underline">Reset Filters</Text.Semibold>
-            </button>
-          )}
-        </div>
-
-        <StarSelector
-          onSelectStar={(value) => {
-            setFilters((prev) => ({ ...prev, rating: value }));
-          }}
-        />
-
-        <GenereSelector />
-
-        <StatusSelector />
-      </section>
-    </aside>
   );
 }

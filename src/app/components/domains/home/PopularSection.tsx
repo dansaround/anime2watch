@@ -22,7 +22,9 @@ export default function PopularSection() {
 
   return (
     <div className="flex flex-col gap-4">
-      <Text.Bold size="2xl">Popular</Text.Bold>
+      <Text.Bold size="2xl" className="text-yellow-500">
+        Popular
+      </Text.Bold>
       <ScrollArea className="w-full whitespace-nowrap">
         <ul className="flex overflow-x-auto gap-5 pb-4 h-full">
           {loading

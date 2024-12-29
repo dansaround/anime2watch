@@ -22,10 +22,10 @@ import Image from "next/image";
 
 export default function StartPage() {
   return (
-    <div className="h-full flex  items-center justify-center  px-4 sm:px-6 lg:px-8">
-      <div className="h-full  flex  items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <Card className="w-full max-w-4xl h-4/5  grid md:grid-cols-2 overflow-hidden">
-          <div className="relative hidden md:block">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="w-full flex items-center justify-center py-8 sm:py-12">
+        <Card className="w-full max-w-4xl mx-4 sm:mx-0 grid md:grid-cols-2 overflow-hidden">
+          <div className="relative hidden md:block min-h-[300px]">
             <Image
               src={DANDADAN}
               alt="Login visual"
@@ -34,8 +34,8 @@ export default function StartPage() {
               fill
             />
           </div>
-          <div className="flex flex-col justify-center items-center">
-            <CardHeader className="space-y-1">
+          <div className="flex flex-col justify-center items-center p-4 sm:p-6">
+            <CardHeader className="space-y-1 w-full">
               <CardTitle className="text-2xl text-center text-yellow-400">
                 Hey there!
               </CardTitle>
@@ -88,7 +88,7 @@ export default function StartPage() {
                   href="/home"
                   className="hover:text-primary underline underline-offset-4"
                 >
-                  Continue to the Home page
+                  Continue to the full site
                 </Link>
               </SignedIn>
             </CardFooter>
