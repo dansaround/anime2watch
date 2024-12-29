@@ -6,6 +6,7 @@ import { GET_ANIMES_BY_IDS } from "@/lib/queries";
 import { SkeletonRectangle } from "@/app/components/SkeletonRectangle";
 import { GetPaginatedRecentAnimesInterface } from "@/lib/types";
 import { FavCard } from "@/app/components/FavCard";
+import { toast, Toaster } from "sonner";
 
 export default function Favorites() {
   const { favs } = useFavorites();
@@ -32,12 +33,23 @@ export default function Favorites() {
     );
   }
 
+  if (error) {
+    toast.error("Ups, something went wrong", {
+      description: "It appears that the server is down, please try again later",
+      action: {
+        label: "Close",
+        onClick: () => console.log("Closed error notification"),
+      },
+    });
+  }
+
   return (
-    <div className="w-full pb-2 pl-8">
+    <div className=" lg:w-3/4 md:w-3/4 sm:w-1/2 pb-2 px-4 mx-auto">
+      <Toaster position="top-center" richColors />
       <Text.Bold size="2xl" className="text-yellow-400 pr-14">
         {"Animes you've favorited"}
       </Text.Bold>
-      <ul className="flex items-center flex-wrap gap-6 mt-6">
+      <ul className="flex items-center lg:justify-start sm:justify-center flex-wrap gap-6 mt-6">
         {loading
           ? Array.from({ length: 5 }).map((_, index) => (
               <SkeletonRectangle key={index} className="w-52 h-80 rounded-md" />

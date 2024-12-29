@@ -10,8 +10,6 @@ import FilteredAnimesList from "@/app/components/domains/home/FilteredAnimesList
 export type AnimeProps = (typeof data.Page.media)[0];
 
 export default function HomePage() {
-  const mockData = data.Page.media;
-
   const { hasFiltersApplied } = useFilteredAnimes({ perPage: 10 });
 
   return (

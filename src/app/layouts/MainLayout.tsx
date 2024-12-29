@@ -15,6 +15,7 @@ import { useAtom } from "jotai";
 import { filtersStateAtom } from "@/app/states/filters-state";
 import { useFilteredAnimes } from "@/hooks/useFiltersAnimes";
 import { Anime } from "@/lib/types";
+import { toast, Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,7 @@ export default function MainLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { loading, data } = useQuery(GET_HERO_SECTION_ANIMES);
+  const { loading, data, error } = useQuery(GET_HERO_SECTION_ANIMES);
 
   const getHeroAnimes = () => {
     return loading
@@ -56,6 +57,18 @@ export default function MainLayout({
       <div className="min-h-96 -mt-16">
         <HomeBanner animes={getHeroAnimes()} isLoading={loading} />
       </div>
+      {error &&
+        toast.error("Ups, something went wrong", {
+          description:
+            "It appears that the server is down, please try again later",
+          action: {
+            label: "Close",
+            onClick: () => console.log("Closd error notification"),
+          },
+        })}
+
+      <Toaster position="top-center" richColors />
+
       <div className="flex-grow">
         <div className="grid grid-cols-[1.2fr_6fr] h-full bg-yellow-300">
           <Sidebar />

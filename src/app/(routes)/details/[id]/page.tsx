@@ -7,6 +7,8 @@ import { useQuery } from "@apollo/client";
 import { SkeletonRectangle } from "@/app/components/SkeletonRectangle";
 import { Text } from "@/app/components/Typography";
 import { Anime } from "@/lib/types";
+import { toast, Toaster } from "sonner";
+import { useEffect } from "react";
 
 export default function DetailsPage() {
   const params = useParams();
@@ -15,10 +17,27 @@ export default function DetailsPage() {
     variables: { id: Number(params.id) },
   });
 
+  useEffect(() => {
+    console.log("useffecting");
+  }, []);
+  useEffect(() => {
+    if (true) {
+      toast.error("Ups, something went wrong", {
+        description: "Anilist server is down ): lease try again later",
+        action: {
+          label: "Close",
+          onClick: () => console.log("Closed error notification"),
+        },
+      });
+    }
+  }, []);
+
   return loading ? (
     <SkeletonRectangle className="w-full h-[200px]" />
   ) : (
     <div className="flex flex-col w-full h-full">
+      <Toaster position="top-center" richColors />
+
       {data && data.Media && (
         <>
           <DetailsBanner anime={data.Media} />

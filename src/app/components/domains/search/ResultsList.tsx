@@ -29,7 +29,7 @@ export default function ResultsList({ results, isLoading }: ResultsListProps) {
           ))
         ) : results.length ? (
           results.map((result, index) => (
-            <Result key={result.id} result={result} index={index} />
+            <ResultCard key={result.id} result={result} index={index} />
           ))
         ) : (
           <div className="w-full h-full flex items-center justify-start">
@@ -43,7 +43,7 @@ export default function ResultsList({ results, isLoading }: ResultsListProps) {
   );
 }
 
-function Result({ result, index }: ResultProps) {
+function ResultCard({ result, index }: ResultProps) {
   const { favs, handleFavorite } = useFavorites();
 
   return (

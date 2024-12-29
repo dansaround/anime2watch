@@ -15,6 +15,11 @@ export function Pagination({
   onPageChange,
   hasNextPage,
 }: PaginationProps) {
+  //label the logs and put in diferent line with /n
+  console.log(
+    `currentPage: ${currentPage}\nlastPage: ${lastPage}\npagesToRender: ${pagesToRender}\nhasNextPage: ${hasNextPage}`
+  );
+
   return (
     <div className="flex items-center justify-start gap-5 mt-4">
       {/* Button to navigate to the previous page */}
@@ -40,7 +45,10 @@ export function Pagination({
         {pagesToRender.map((page, index) => (
           <button
             key={index}
-            onClick={() => onPageChange(page)}
+            onClick={() => {
+              onPageChange(page);
+              console.log("las páginas a cambiar :\n", page, currentPage);
+            }}
             className={`px-2 py-1 ${
               page === currentPage ? "font-bold underline" : ""
             }`}
