@@ -15,9 +15,9 @@ import Image from "next/image";
 
 export default function StartPage() {
   return (
-    <div className="h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="w-full flex items-center justify-center py-8 sm:py-12">
-        <Card className="w-full max-w-4xl mx-4 sm:mx-0 grid md:grid-cols-2 overflow-hidden">
+    <div className="h-full mt-4 md:h-full flex items-center justify-center  px-4 sm:px-6 lg:px-8">
+      <div className="w-full flex items-center justify-center py-4 sm:py-12">
+        <Card className="w-full  md:mt-0 max-w-4xl mx-4 sm:mx-0 grid md:grid-cols-2 overflow-hidden">
           <div className="relative hidden md:block min-h-[300px]">
             <Image
               src={DANDADAN}
