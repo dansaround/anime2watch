@@ -5,6 +5,8 @@ import { Text } from "@/app/components/Typography";
 import { Anime } from "@/lib/types";
 import { toast, Toaster } from "sonner";
 import createApolloClient from "@/lib/apollo.client";
+import { TriangleAlert } from "lucide-react";
+import { useToast } from "@/hooks/useToast";
 
 export default async function DetailsPage(props: any) {
   const client = createApolloClient();
@@ -16,10 +18,16 @@ export default async function DetailsPage(props: any) {
     },
   });
 
-  if (!error) {
+  if (error) {
     return (
-      <div className="flex flex-col w-full h-full">
-        <div>Error: {JSON.stringify(error, null, 2)}</div>
+      <div className="w-full flex flex-col items-center justify-center min-h-[40vh] gap-4">
+        <TriangleAlert size={48} className="text-red-400" />
+        <Text.Semibold className="text-xl text-red-500">
+          Unable to load anime details
+        </Text.Semibold>
+        <Text.Regular className="text-red-400 text-center scale-90 sm:scale-100">
+          There was an error loading the anime details. Please try again later.
+        </Text.Regular>
       </div>
     );
   }
@@ -38,34 +46,6 @@ export default async function DetailsPage(props: any) {
           </div>
         </>
       )}
-    </div>
-  );
-}
-
-function AnimeStats({ anime }: { anime: Anime }) {
-  return (
-    <>
-      <Text.Semibold size="lg">Stats</Text.Semibold>
-      <ul className="flex flex-wrap gap-2">
-        {anime.averageScore && (
-          <RowInfo value="Score" label={anime.averageScore.toString()} />
-        )}
-        {anime.episodes && (
-          <RowInfo value="Episodes" label={anime.episodes.toString()} />
-        )}
-        {anime.startDate && (
-          <RowInfo value="Start Date" label={anime.startDate.toString()} />
-        )}
-      </ul>
-    </>
-  );
-}
-
-function RowInfo({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="flex w-full justify-between items-center gap-4">
-      <Text.Semibold size="sm">{value} :</Text.Semibold>
-      <Text size="sm">{label}</Text>
     </div>
   );
 }

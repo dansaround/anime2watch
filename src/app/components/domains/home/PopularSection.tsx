@@ -27,13 +27,21 @@ export default function PopularSection() {
       </Text.Bold>
       <ScrollArea className="w-full whitespace-nowrap">
         <ul className="flex overflow-x-auto gap-5 pb-4 h-full">
-          {loading
-            ? Array.from({ length: 10 }).map((_, index) => (
-                <SkeletonRectangle key={index} className="w-56 h-80" />
-              ))
-            : animes.map((anime, index) => (
-                <FavCard key={anime.id} anime={anime} index={index} />
-              ))}
+          {loading ? (
+            Array.from({ length: 10 }).map((_, index) => (
+              <SkeletonRectangle key={index} className="w-56 h-80" />
+            ))
+          ) : error ? (
+            <div className="w-56 h-80 flex items-center justify-center bg-gray-800 rounded-lg">
+              <Text.Regular className="text-red-500 text-center px-4">
+                Error loading popular anime
+              </Text.Regular>
+            </div>
+          ) : (
+            animes.map((anime, index) => (
+              <FavCard key={anime.id} anime={anime} index={index} />
+            ))
+          )}
         </ul>
 
         <ScrollBar orientation="horizontal" />

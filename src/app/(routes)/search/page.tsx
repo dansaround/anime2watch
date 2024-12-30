@@ -57,8 +57,13 @@ export default function SearchPage() {
       <Text.Bold size="4xl" className="text-yellow-400 lg:pl-0 pl-4">
         Top Results:
       </Text.Bold>
+      {/* add validation error without card just the message  */}
 
-      <ResultsList results={data ? data.Page.media : []} isLoading={loading} />
+      <ResultsList
+        error={!!error}
+        results={data ? data.Page.media : []}
+        isLoading={loading}
+      />
     </div>
   );
 }

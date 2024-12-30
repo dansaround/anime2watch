@@ -8,10 +8,15 @@ import { Text } from "@/app/components/Typography";
 import { useFavorites } from "@/hooks/useFavorites";
 import { SkeletonRectangle } from "../../SkeletonRectangle";
 import { placeholderImageBase64 } from "@/app/states/search-state";
+import { FavCard } from "../../FavCard";
+import { TriangleAlert } from "lucide-react";
+import { useToast } from "@/hooks/useToast";
+import { useEffect } from "react";
 
 interface ResultsListProps {
   results: Anime[];
   isLoading: boolean;
+  error?: boolean;
 }
 
 interface ResultProps {
@@ -19,23 +24,56 @@ interface ResultProps {
   index: number;
 }
 
-export default function ResultsList({ results, isLoading }: ResultsListProps) {
+export default function ResultsList({
+  results,
+  isLoading,
+  error,
+}: ResultsListProps) {
+  const { notify } = useToast();
+
+  useEffect(() => {
+    if (error) {
+      notify({
+        type: "error",
+        message: "Ups, something went wrong",
+        description: "Anilist server is down, please try again later",
+        action: {
+          label: "close",
+          onClick: () => console.log("useEffect from ResultsList"),
+        },
+      });
+    }
+  }, [error]);
+
   return (
     <div className=" pb-2">
       <ul className="flex justify-evenly lg:justify-start  items-center flex-wrap gap-6 mt-6">
-        {isLoading ? (
-          Array.from({ length: 16 }).map((_, index) => (
-            <SkeletonRectangle key={index} className="w-48 h-72 rounded-md" />
-          ))
-        ) : results.length ? (
-          results.map((result, index) => (
-            <ResultCard key={result.id} result={result} index={index} />
-          ))
-        ) : (
-          <div className="w-full h-full flex items-center justify-start">
-            <Text.Semibold size="lg" className="text-gray-400">
-              No results found
+        {isLoading
+          ? Array.from({ length: 16 }).map((_, index) => (
+              <SkeletonRectangle key={index} className="w-48 h-72 rounded-md" />
+            ))
+          : results.length
+          ? results.map((result, index) => (
+              <FavCard key={result.id} anime={result} index={index} />
+            ))
+          : !error && (
+              <div className="w-full h-full flex items-center justify-start">
+                <Text.Semibold size="lg" className="text-gray-400">
+                  No results found
+                </Text.Semibold>
+              </div>
+            )}
+
+        {error && (
+          <div className="w-full flex flex-col items-center justify-center min-h-[40vh] gap-4">
+            <TriangleAlert size={48} className="text-red-400" />
+            <Text.Semibold className="text-xl text-red-500">
+              Unable to load results
             </Text.Semibold>
+            <Text.Regular className="text-red-400 text-center scale-90 sm:scale-100">
+              There was an error loading the search results. Please try again
+              later.
+            </Text.Regular>
           </div>
         )}
       </ul>

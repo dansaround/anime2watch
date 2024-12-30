@@ -7,6 +7,8 @@ import { toast, Toaster } from "sonner";
 import { SkeletonRectangle } from "../../SkeletonRectangle";
 import { FavCard } from "../../FavCard";
 
+const maxPerPage = 15;
+
 export default function FilteredAnimesList() {
   const {
     error,
@@ -18,7 +20,7 @@ export default function FilteredAnimesList() {
     hasNextPage,
     totalResults,
     pagesToRender,
-  } = useFilteredAnimes({ perPage: 10 });
+  } = useFilteredAnimes({ perPage: maxPerPage });
 
   if (loading) {
     return <Text.Semibold>Loading...</Text.Semibold>;
@@ -26,7 +28,9 @@ export default function FilteredAnimesList() {
 
   return (
     <div className="mt-4">
-      <Text.Bold>{totalResults} results </Text.Bold>
+      <Text.Bold>
+        {maxPerPage * currentPage} of {totalResults} results
+      </Text.Bold>
       <Toaster position="top-center" richColors />
 
       <Pagination

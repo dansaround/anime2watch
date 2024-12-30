@@ -74,7 +74,7 @@ export default function Header() {
             Anime2Watch
           </Text.Bold>
         </Link>
-        <nav className={cn(!isSearching ? "block" : "hidden")}>
+        <nav className={cn(!isSearching ? "block" : "hidden md:block")}>
           <ul className="flex space-x-4">
             {pathname !== "/" && (
               <Link href="/favorites">

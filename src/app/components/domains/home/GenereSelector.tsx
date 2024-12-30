@@ -42,19 +42,22 @@ export default function GenereSelector() {
 
   return (
     <div className="w-full flex flex-col pt-6 pb-2">
-      <div className="flex w-full justify-between items-center">
-        <Text.Bold size="lg" className="">
-          Gender
-        </Text.Bold>
+      <button className="w-fit" onClick={() => setShowGeneres(!showGeneres)}>
+        <div className="flex w-fit justify-start gap-4 items-center">
+          <Text.Bold size="lg" className="">
+            Gender
+          </Text.Bold>
 
-        <FaChevronDown
-          onClick={() => setShowGeneres(!showGeneres)}
-          className={classnames(
-            "cursor-pointer transition-all duration-200",
-            showGeneres && "rotate-180"
-          )}
-        />
-      </div>
+          <FaChevronDown
+            size={14}
+            onClick={() => setShowGeneres(!showGeneres)}
+            className={classnames(
+              "cursor-pointer transition-all duration-200",
+              showGeneres && "rotate-180"
+            )}
+          />
+        </div>
+      </button>
 
       {showGeneres && (
         <ul className="flex flex-col gap-2 mt-4">

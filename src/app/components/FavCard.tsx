@@ -9,8 +9,17 @@ import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { formatTitle } from "../utils/formatTitle";
 import { useFavorites } from "@/hooks/useFavorites";
+import { cn } from "@/lib/utils";
 
-export function FavCard({ anime, index }: { anime: Anime; index: number }) {
+export function FavCard({
+  anime,
+  index,
+  hoverBackground = true,
+}: {
+  anime: Anime;
+  index: number;
+  hoverBackground?: boolean;
+}) {
   const { favs, handleFavorite } = useFavorites();
 
   const handleClickOnFavorite = (
@@ -53,7 +62,13 @@ export function FavCard({ anime, index }: { anime: Anime; index: number }) {
             )}
           </div>
 
-          <div className="absolute inset-0 bg-black/70 hover:bg-black/10 transition-all duration-[250ms] p-4 flex flex-col justify-between">
+          <div
+            className={cn(
+              hoverBackground &&
+                "bg-black/50 hover:bg-black/0 transition-all duration-[250ms] ",
+              "absolute inset-0 p-4 flex flex-col justify-between"
+            )}
+          >
             <div>
               <Text.Bold size="xl" className="text-lg font-bold">
                 {formatTitle(

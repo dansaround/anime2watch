@@ -1,22 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classnames from "classnames";
 import { FaStar } from "react-icons/fa";
 import { Text } from "@/app/components/Typography";
+import { useAtom } from "jotai";
+import { filtersStateAtom } from "@/app/states/filters-state";
 
-export default function StarSelector({
-  onSelectStar,
-}: {
-  onSelectStar: (value: number) => void;
-}) {
+export default function StarSelector() {
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const [filters, setFilters] = useAtom(filtersStateAtom);
+
+  useEffect(() => {
+    if (!filters.rating) {
+      setSelectedIndex(-1);
+    }
+  }, [filters.rating]);
 
   const parseIndexToPoints = (index: number) => (index + 1) * 20;
 
   const handleClick = (currentIndex: number) => {
     setSelectedIndex(currentIndex);
-    onSelectStar(parseIndexToPoints(currentIndex));
+    setFilters((prev) => ({
+      ...prev,
+      rating: parseIndexToPoints(currentIndex),
+    }));
   };
 
   return (

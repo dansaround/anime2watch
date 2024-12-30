@@ -35,12 +35,12 @@ export function Sidebar() {
 
   return (
     <aside className="bg-black w-full h-full flex flex-col items-center justify-center md:justify-start pt-3 px-3 gap-3">
-      <section className=" ">
+      <section className="px-4">
         <Collapsible
-          defaultOpen={isOpen}
+          defaultOpen={width > 768}
           className="w-[350px] min-h-16 space-y-4"
         >
-          <div className="flex items-center justify-between space-x-4 px-4">
+          <div className="flex items-center justify-between space-x-4 ">
             <h4 className="text-sm font-semibold">Show filters</h4>
             <CollapsibleTrigger>
               <GhostButton color="neutral" size="sm">
@@ -50,7 +50,7 @@ export function Sidebar() {
             </CollapsibleTrigger>
           </div>
           <CollapsibleContent>
-            <div className="flex justify-between items-center mb-5">
+            <div className="flex justify-between items-center mb-5 ">
               <Text.Bold size="xl" className="pb-2 text-center text-yellow-400">
                 Filters
               </Text.Bold>
@@ -64,11 +64,7 @@ export function Sidebar() {
               )}
             </div>
 
-            <StarSelector
-              onSelectStar={(value) => {
-                setFilters((prev) => ({ ...prev, rating: value }));
-              }}
-            />
+            <StarSelector />
 
             <GenereSelector />
 
