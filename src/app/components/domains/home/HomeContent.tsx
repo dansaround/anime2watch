@@ -57,7 +57,7 @@ export default function HomeContent({
       )}
 
       {hasFiltersApplied && (
-        <div className="p-6">
+        <div className="w-full">
           <FilteredAnimesList />
         </div>
       )}

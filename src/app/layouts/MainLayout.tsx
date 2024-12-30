@@ -64,7 +64,7 @@ export default async function MainLayout({
         <div className="flex-grow">
           <div className="grid md:grid-cols-[1.4fr_6fr] h-full bg-yellow-300">
             <Sidebar />
-            <main className="bg-black w-full h-full overflow-x-hidden ">
+            <main className="bg-black md:w-full px-4 md:px-0 h-full overflow-x-hidden ">
               {children}
             </main>
           </div>

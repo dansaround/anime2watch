@@ -36,7 +36,7 @@ export function Sidebar() {
 
   return (
     <aside className="bg-black w-full h-full flex flex-col items-center justify-center md:justify-start pt-3 px-3 gap-3">
-      <section className="px-4">
+      <section>
         <Collapsible
           defaultOpen={width > 768}
           className="w-[350px] min-h-16 space-y-4"

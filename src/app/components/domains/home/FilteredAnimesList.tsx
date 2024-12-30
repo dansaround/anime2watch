@@ -27,7 +27,7 @@ export default function FilteredAnimesList() {
   }
 
   return (
-    <div className="mt-4">
+    <div className="mt-4  w-full">
       <Text.Bold>
         {maxPerPage * currentPage} of {totalResults} results
       </Text.Bold>
@@ -41,7 +41,7 @@ export default function FilteredAnimesList() {
         pagesToRender={pagesToRender}
       />
 
-      <ul className="flex items-center flex-wrap gap-6 mt-6">
+      <ul className="flex items-center flex-wrap gap-6 mt-6  max-w-full justify-center md:justify-start">
         {loading
           ? Array.from({ length: 5 }).map((_, index) => (
               <SkeletonRectangle key={index} className="w-52 h-80 rounded-md" />
