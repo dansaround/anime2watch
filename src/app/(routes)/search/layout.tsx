@@ -11,10 +11,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Anime2Watch | Search",
-  description: "The information you need of your favorite anime",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: any;
+}): Promise<any> {
+  // Get search query from params and decode it
+  const query = params?.q ? decodeURIComponent(params.q) : "";
+
+  return {
+    title: query ? `Search '${query}'` : "Search",
+    description: "Search anime and manga titles",
+    openGraph: {
+      title: query ? `Search '${query}'` : "Search",
+      description: "Search anime and manga titles",
+      images: [
+        "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: query ? `Search '${query}'` : "Search",
+      description: "Search anime and manga titles",
+      images: [
+        "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
+      ],
+    },
+  };
+}
 
 export default function SearchRootLayout({
   children,

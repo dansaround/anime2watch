@@ -54,7 +54,7 @@ This is a anime library project to showcase the usage of the following stack
 
 ### 7. SEO
 
-- [ ] Implement **SEO**:
+- [x] Implement **SEO**:
   - Add **meta tags** y **Open Graph tags**.
   - Use **Server-Side Rendering** (SSR) or **Static Site Generation** (SSG) feature.
   - SEO friendly routes.
@@ -75,4 +75,4 @@ This is a anime library project to showcase the usage of the following stack
 ## Extra:
 
 - [x] Login feature using Clerk.
-- [ ] Profiles
+- [x] Profiles

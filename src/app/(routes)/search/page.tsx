@@ -1,55 +1,41 @@
-"use client";
-
-import { useAtom } from "jotai";
-import { toast, Toaster } from "sonner";
-import { useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
+import { GET_ANIME_BY_ID, SEARCH_ANIMES_BY_TITLE } from "@/lib/queries";
 import { Text } from "@/app/components/Typography";
-import { searchAtom } from "@/app/states/search-state";
-import { SEARCH_ANIMES_BY_TITLE } from "@/lib/queries";
+import { Toaster } from "sonner";
+import createApolloClient from "@/lib/apollo.client";
 import ResultsList from "@/app/components/domains/search/ResultsList";
-import { useToast } from "@/hooks/useToast";
+import { TriangleAlert } from "lucide-react";
 
-export default function SearchPage() {
-  const { notify } = useToast();
-  const [search, setSearch] = useAtom(searchAtom);
-  // Function to extract and decode the search parameter from the URL
-  const getSearchFromURL = () => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const encodedSearch = searchParams.get("q") || "";
-    return decodeURIComponent(decodeURIComponent(encodedSearch));
-  };
+// Convert to server component by making it async
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: { q: string };
+}) {
+  const client = createApolloClient();
+  const searchQuery = searchParams.q || "";
 
-  useEffect(() => {
-    const urlSearch = getSearchFromURL();
-    if (urlSearch) setSearch(urlSearch);
-  }, []);
-
-  const debouncedSearch = useDebounce(search, 500);
-
-  const { data, loading, error } = useQuery(SEARCH_ANIMES_BY_TITLE, {
+  const { data, error, loading } = await client.query({
+    query: SEARCH_ANIMES_BY_TITLE,
     variables: {
-      search: debouncedSearch,
+      search: decodeURIComponent(searchQuery),
       page: 1,
       perPage: 50,
     },
-    skip: !search,
   });
 
-  useEffect(() => {
-    if (error) {
-      notify({
-        type: "error",
-        message: "Ups, something went wrong",
-        description: "Anilist server is down  please try again later",
-        action: {
-          label: "close",
-          onClick: () => console.log("useffecting from hook at details page"),
-        },
-      });
-    }
-  }, [error]);
+  if (error) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center min-h-[40vh] gap-4">
+        <TriangleAlert size={48} className="text-red-400" />
+        <Text.Semibold className="text-xl text-red-500">
+          Unable to load search results
+        </Text.Semibold>
+        <Text.Regular className="text-red-400 text-center scale-90 sm:scale-100">
+          There was an error loading the search results. Please try again later.
+        </Text.Regular>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-full h-full flex flex-col gap-4 relative">
@@ -57,7 +43,6 @@ export default function SearchPage() {
       <Text.Bold size="4xl" className="text-yellow-400 lg:pl-0 pl-4">
         Top Results:
       </Text.Bold>
-      {/* add validation error without card just the message  */}
 
       <ResultsList
         error={!!error}

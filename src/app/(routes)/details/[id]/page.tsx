@@ -2,11 +2,9 @@ import { GET_ANIME_BY_ID } from "@/lib/queries";
 import { DetailsBanner } from "@/app/components/Banners/DetailsBanner";
 import { SkeletonRectangle } from "@/app/components/SkeletonRectangle";
 import { Text } from "@/app/components/Typography";
-import { Anime } from "@/lib/types";
-import { toast, Toaster } from "sonner";
+import { Toaster } from "sonner";
 import createApolloClient from "@/lib/apollo.client";
 import { TriangleAlert } from "lucide-react";
-import { useToast } from "@/hooks/useToast";
 
 export default async function DetailsPage(props: any) {
   const client = createApolloClient();

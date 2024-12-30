@@ -1,10 +1,7 @@
 import createApolloClient from "@/lib/apollo.client";
 import { GET_ANIME_BY_ID } from "@/lib/queries";
 import { Anime } from "@/lib/types";
-import { gql } from "@apollo/client";
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Text } from "@/app/components/Typography";
 import React from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
