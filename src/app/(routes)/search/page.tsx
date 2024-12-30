@@ -1,4 +1,4 @@
-import { GET_ANIME_BY_ID, SEARCH_ANIMES_BY_TITLE } from "@/lib/queries";
+import { SEARCH_ANIMES_BY_TITLE } from "@/lib/queries";
 import { Text } from "@/app/components/Typography";
 import { Toaster } from "sonner";
 import createApolloClient from "@/lib/apollo.client";
@@ -10,40 +10,56 @@ export async function generateMetadata({
 }: {
   searchParams: { q?: string }; // Define el tipo de los parámetros de consulta
 }): Promise<any> {
-  // Get search query from params and decode it
-  // const query = props?.searchParams.q
-  //   ? decodeURIComponent(decodeURIComponent(props.searchParams.q))
-  //   : "";
+  const query = decodeURIComponent(decodeURIComponent(searchParams?.q || ""));
 
-  // If there's no query, return default metadata
-  // if (!query) {
+  if (!query) {
+    return {
+      title: "Search",
+      description: "Search anime and manga titles",
+    };
+  }
 
-  // }
+  const client = createApolloClient();
 
-  const a = searchParams?.q || "hesoyam";
+  // Fetch search results to get the count
+  const { data, error } = await client.query({
+    query: SEARCH_ANIMES_BY_TITLE,
+    variables: {
+      search: query,
+      page: 1,
+      perPage: 1000,
+    },
+  });
+
+  if (error) {
+    return {
+      title: "Search",
+      description: "Search anime and manga titles",
+    };
+  }
+
+  const resultCount = data?.Page?.media?.length || 0;
+  const titleText = `Search: ${query} - ${resultCount} results`;
 
   return {
-    title: `${JSON.stringify(a)}`,
-    description: "Search anime and manga titles",
-    // ... rest of default metadata
+    title: titleText,
+    description: `Search results for "${query}"`,
+    openGraph: {
+      title: titleText,
+      description: `Search results for "${query}"`,
+      images: [
+        "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: titleText,
+      description: `Search results for "${query}"`,
+      images: [
+        "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
+      ],
+    },
   };
-
-  // return {
-  //   title: `Anime2Watch Search - ${query}`,
-  //   openGraph: {
-  //     title: `Anime2Watch Search - ${query}`,
-  //     images: [
-  //       "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
-  //     ],
-  //   },
-  //   twitter: {
-  //     card: "summary_large_image",
-  //     title: `Anime2Watch Search - ${query}`,
-  //     images: [
-  //       "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
-  //     ],
-  //   },
-  // };
 }
 
 // Convert to server component by making it async
