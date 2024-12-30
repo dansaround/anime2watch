@@ -24,7 +24,6 @@ export const GET_PAGINATED_POPULAR_ANIMES = gql`
         episodes
         genres
         coverImage {
-          large
           extraLarge
         }
         bannerImage
