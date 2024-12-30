@@ -1,36 +1,28 @@
-"use client";
-
-import { useParams } from "next/navigation";
 import { GET_ANIME_BY_ID } from "@/lib/queries";
 import { DetailsBanner } from "@/app/components/Banners/DetailsBanner";
-import { useQuery } from "@apollo/client";
 import { SkeletonRectangle } from "@/app/components/SkeletonRectangle";
 import { Text } from "@/app/components/Typography";
 import { Anime } from "@/lib/types";
 import { toast, Toaster } from "sonner";
-import { useEffect } from "react";
+import createApolloClient from "@/lib/apollo.client";
 
-export default function DetailsPage(props: any) {
-  const params = useParams();
+export default async function DetailsPage(props: any) {
+  const client = createApolloClient();
 
-  console.log({ props });
-
-  const { data, loading, error } = useQuery(GET_ANIME_BY_ID, {
-    variables: { id: Number(params.id) },
+  const { data, error, loading } = await client.query({
+    query: GET_ANIME_BY_ID,
+    variables: {
+      id: Number(props.params.id),
+    },
   });
 
-  useEffect(() => {
-    if (error) {
-      toast.error("Ups, something went wrong", {
-        description: "Anilist server is down ): lease try again later",
-        action: {
-          label: "Close",
-          onClick: () => console.log("Closed error notification"),
-        },
-      });
-    }
-    console.log("useffecting at details page");
-  }, [error]);
+  if (!error) {
+    return (
+      <div className="flex flex-col w-full h-full">
+        <div>Error: {JSON.stringify(error, null, 2)}</div>
+      </div>
+    );
+  }
 
   return loading ? (
     <SkeletonRectangle className="w-full h-[200px]" />

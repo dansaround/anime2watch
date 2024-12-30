@@ -27,12 +27,16 @@ const geistMono = Geist_Mono({
 // }
 
 export const metadata: Metadata = {
-  title: "Anime2Watch | Search",
+  title: "Anime2Watch | Home",
   description: "The information you need of your favorite anime",
   openGraph: {
-    title: "Anime2Watch | Search",
+    title: "Anime2Watch | Home",
     description: "The information you need of your favorite anime",
-    images: ["https://hackmd.io/_uploads/Skp5aoJ8kg.png"],
+    images: [
+      "https://www.kinkohn.com/cdn/shop/files/DDD1.png?v=1719207896&width=493",
+    ],
+    url: "https://anime2watch.vercel.app/home",
+    type: "website",
   },
   metadataBase: new URL("https://anime2watch.vercel.app"),
 };

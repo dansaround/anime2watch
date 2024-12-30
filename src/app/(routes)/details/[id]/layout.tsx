@@ -51,8 +51,10 @@ export async function generateMetadata({
 
 export default async function DetailLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: any;
 }>) {
   return (
     <div
