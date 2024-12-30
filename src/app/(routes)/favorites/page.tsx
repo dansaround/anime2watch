@@ -57,7 +57,7 @@ export default function Favorites() {
   }
 
   return (
-    <div className="lg:w-3/4 md:w-3/4 pb-2 px-4 mx-auto">
+    <div className="lg:w-3/4 md:w-3/4 pb-2 px-4 mx-auto my-4">
       <Toaster position="top-center" richColors />
       <Text.Bold size="2xl" className="text-yellow-400 pr-14">
         {"Animes you've favorited "}

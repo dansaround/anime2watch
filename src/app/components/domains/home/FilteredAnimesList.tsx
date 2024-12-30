@@ -27,7 +27,7 @@ export default function FilteredAnimesList() {
   }
 
   return (
-    <div className="mt-4  w-full">
+    <div className="my-4  w-full ">
       <Text.Bold>
         {maxPerPage * currentPage} of {totalResults} results
       </Text.Bold>
