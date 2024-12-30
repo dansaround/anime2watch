@@ -6,20 +6,17 @@ import { AnimeCard } from "../../AnimeCard";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SkeletonRectangle } from "../../SkeletonRectangle";
 import { FavCard } from "../../FavCard";
+import { Anime } from "@/lib/types";
 
-export default function PopularSection() {
-  const {
-    loading,
-    error,
-    animes,
-    totalResults,
-    currentPage,
-    lastPage,
-    hasNextPage,
-    pagesToRender,
-    setPage,
-  } = usePopularAnimes({ perPage: 10 });
-
+export default function PopularSection({
+  animes,
+  loading,
+  error,
+}: {
+  animes: Anime[];
+  loading: boolean;
+  error: boolean;
+}) {
   return (
     <div className="flex flex-col gap-4">
       <Text.Bold size="2xl" className="text-yellow-500">

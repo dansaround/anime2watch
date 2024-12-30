@@ -6,20 +6,17 @@ import { AnimeCard } from "../../AnimeCard";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { FavCard } from "../../FavCard";
 import { SkeletonRectangle } from "../../SkeletonRectangle";
+import { Anime } from "@/lib/types";
 
-export default function RecentsSection() {
-  const {
-    loading,
-    error,
-    animes,
-    totalResults,
-    currentPage,
-    lastPage,
-    hasNextPage,
-    pagesToRender,
-    setPage,
-  } = useRecentAnimes({ perPage: 10 });
-
+export default function RecentsSection({
+  animes,
+  loading,
+  error,
+}: {
+  animes: Anime[];
+  loading: boolean;
+  error: boolean;
+}) {
   return (
     <div className="flex flex-col gap-4">
       <Text.Bold size="2xl" className="text-yellow-500">

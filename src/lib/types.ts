@@ -13,6 +13,7 @@ export interface Anime {
   episodes: number | null;
   genres: string[];
   coverImage: {
+    large: string;
     extraLarge: string;
   };
   bannerImage: string | null;
