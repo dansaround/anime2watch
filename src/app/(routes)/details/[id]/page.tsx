@@ -10,8 +10,10 @@ import { Anime } from "@/lib/types";
 import { toast, Toaster } from "sonner";
 import { useEffect } from "react";
 
-export default function DetailsPage() {
+export default function DetailsPage(props: any) {
   const params = useParams();
+
+  console.log({ props });
 
   const { data, loading, error } = useQuery(GET_ANIME_BY_ID, {
     variables: { id: Number(params.id) },

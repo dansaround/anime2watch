@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
-}): Promise<Metadata> {
+  params: any;
+}): Promise<any> {
   const client = createApolloClient();
 
   const { data, error } = await client.query({
