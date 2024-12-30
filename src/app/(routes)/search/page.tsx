@@ -5,12 +5,10 @@ import createApolloClient from "@/lib/apollo.client";
 import ResultsList from "@/app/components/domains/search/ResultsList";
 import { TriangleAlert } from "lucide-react";
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: { q?: string }; // Define el tipo de los parámetros de consulta
-}): Promise<any> {
-  const query = decodeURIComponent(decodeURIComponent(searchParams?.q || ""));
+export async function generateMetadata(props: any): Promise<any> {
+  const query = decodeURIComponent(
+    decodeURIComponent(props.searchParams?.q || "")
+  );
 
   if (!query) {
     return {
