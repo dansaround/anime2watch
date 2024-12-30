@@ -9,59 +9,43 @@ import { Text } from "@/app/components/Typography";
 import { Anime } from "@/lib/types";
 import { toast, Toaster } from "sonner";
 import { useEffect } from "react";
-import { useToast } from "@/hooks/useToast";
-import { GetServerSidePropsContext, GetServerSideProps } from "next";
-import createApolloClient from "@/lib/apollo.client";
 
-export interface DetailsServerSideProps {
-  anime: Anime;
-}
-
-export default function DetailsPage({
-  props,
-}: {
-  props: DetailsServerSideProps;
-}) {
+export default function DetailsPage() {
   const params = useParams();
 
-  const { notify } = useToast();
+  const { data, loading, error } = useQuery(GET_ANIME_BY_ID, {
+    variables: { id: Number(params.id) },
+  });
 
-  // const { data, loading, error } = useQuery(GET_ANIME_BY_ID, {
-  //   variables: { id: Number(params.id) },
-  // });
+  useEffect(() => {
+    if (error) {
+      toast.error("Ups, something went wrong", {
+        description: "Anilist server is down ): lease try again later",
+        action: {
+          label: "Close",
+          onClick: () => console.log("Closed error notification"),
+        },
+      });
+    }
+    console.log("useffecting at details page");
+  }, [error]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     notify({
-  //       type: "error",
-  //       message: "Ups, something went wrong",
-  //       description: "Anilist server is down  please try again later",
-  //       action: {
-  //         label: "close",
-  //         onClick: () => console.log("useffecting from hook at details page"),
-  //       },
-  //     });
-  //   }
-  // }, [error]);
+  return loading ? (
+    <SkeletonRectangle className="w-full h-[200px]" />
+  ) : (
+    <div className="flex flex-col w-full h-full">
+      <Toaster position="top-center" richColors />
 
-  // return loading ? (
-  //   <SkeletonRectangle className="w-full h-[200px]" />
-  // ) : (
-  //   <div className="flex flex-col w-full h-full">
-  //     <Toaster position="top-center" richColors />
-
-  //     {data && data.Media && (
-  //       <>
-  //         <DetailsBanner anime={data.Media} />
-  //         <div className="grid grid-cols-[1fr_0.3fr]">
-  //           <AnimeStats anime={data.Media} />
-  //         </div>
-  //       </>
-  //     )}
-  //   </div>
-  // );
-
-  return <div>{JSON.stringify(props, null, 2)}</div>;
+      {data && data.Media && (
+        <>
+          <DetailsBanner anime={data.Media} />
+          <div className="grid grid-cols-[1fr_0.3fr]">
+            {/* <AnimeStats anime={data.Media} /> */}
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 function AnimeStats({ anime }: { anime: Anime }) {

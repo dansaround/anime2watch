@@ -5,6 +5,7 @@ import { gql } from "@apollo/client";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Text } from "@/app/components/Typography";
+import React from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -50,37 +51,13 @@ export async function generateMetadata({
 
 export default async function DetailLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { id: string };
 }>) {
-  const client = createApolloClient();
-
-  const { data, error } = await client.query({
-    query: GET_ANIME_BY_ID,
-    variables: {
-      id: Number(params.id),
-    },
-  });
-
-  if (error) {
-    return <div>Error fetching anime data</div>;
-  }
-
-  const anime: Anime = data.Media;
-
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen relative w-full`}
     >
-      <div>
-        <span>
-          <Text className="text-yellow-400" size="lg">
-            {anime.title.english || anime.title.native}
-          </Text>
-        </span>
-      </div>
       {children}
     </div>
   );
