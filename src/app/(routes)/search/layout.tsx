@@ -13,13 +13,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export async function generateMetadata({
-  params,
-}: {
-  params: any;
-}): Promise<any> {
+export async function generateMetadata(props: any): Promise<any> {
   // Get search query from params and decode it
-  const query = params?.q ? decodeURIComponent(params.q) : "";
+  const query = props?.searchParams?.q
+    ? decodeURIComponent(decodeURIComponent(props.searchParams.q))
+    : "";
 
   // If there's no query, return default metadata
   if (!query) {
