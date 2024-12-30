@@ -10,13 +10,17 @@ import { GenresTooltip } from "../GenresTooltip";
 import { cn } from "@/lib/utils";
 import { Text } from "../Typography";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export function DetailsBanner({ anime }: { anime: Anime }) {
   const { favs, handleFavorite } = useFavorites();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const description = anime.description.split("<")[0];
 
   return (
-    <div className="w-full  md:min-h-96 md:relative flex flex-col">
-      <div className="w-full h-2/5 md:h-full md:absolute md:left-0 md:top-0 flex flex-col items-center justify-center">
+    <div className="relative w-full min-h-[400px] md:min-h-96">
+      <div className="absolute inset-0">
         <Image
           src={anime.bannerImage || anime.coverImage.extraLarge}
           alt="Hero Image"
@@ -34,22 +38,38 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className={cn(
-          "absolute h-full w-full z-10 bg-gradient-to-b from-black/90 to-from-black/20 flex items-center justify-evenly  p-10 xl:px-64 "
+          "relative h-full w-full z-10 bg-gradient-to-b from-black/90 to-from-black/20",
+          "p-6 md:p-10 xl:px-64"
         )}
       >
-        <div className="flex flex-col h-full md:flex-row gap-2 ">
+        <div className="flex flex-col h-full md:flex-row gap-4 md:gap-2 md:items-center">
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="h-full"
           >
-            <h2 className="text-4xl font-bold text-yellow-400  ">
+            <h2 className="text-4xl font-bold text-yellow-400">
               {anime.title.english || anime.title.native}
             </h2>
-            <span className="text-wrap">
-              `{anime.description.split("<")[0]}`
-            </span>
+            <div className="relative">
+              <p
+                className={cn(
+                  "text-wrap transition-all duration-300",
+                  !isExpanded && "line-clamp-2"
+                )}
+              >
+                {description}
+              </p>
+              {description.length > 150 && (
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="text-yellow-400 hover:text-yellow-200 mt-1 underline text-sm font-semibold"
+                >
+                  {isExpanded ? "Show Less" : "Continue Reading"}
+                </button>
+              )}
+            </div>
             <div className="mt-3">
               <GenresTooltip anime={anime} />
             </div>
@@ -84,7 +104,7 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
             transition={{ delay: 0.6, duration: 0.6 }}
             className=""
           >
-            <div className="min-w-[200px] md:min-w-[300px] md:scale-90 scale-100 mx-auto">
+            <div className="min-w-[200px] md:min-w-[300px] md:scale-90 scale-75 mx-auto">
               <ChartRating
                 likes={anime.averageScore || 0}
                 dislikes={100 - (anime.averageScore || 0)}
