@@ -9,6 +9,7 @@ import { ChartRating } from "../ChartRating";
 import { GenresTooltip } from "../GenresTooltip";
 import { cn } from "@/lib/utils";
 import { Text } from "../Typography";
+import { motion } from "framer-motion";
 
 export function DetailsBanner({ anime }: { anime: Anime }) {
   const { favs, handleFavorite } = useFavorites();
@@ -28,13 +29,21 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
           }}
         />
       </div>
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         className={cn(
-          "absolute h-full z-10 bg-gradient-to-t from-black/80 to-transparent flex items-center justify-evenly  p-10 xl:px-64 "
+          "absolute h-full w-full z-10 bg-gradient-to-b from-black/90 to-from-black/20 flex items-center justify-evenly  p-10 xl:px-64 "
         )}
       >
         <div className="flex flex-col h-full md:flex-row gap-2 ">
-          <div className="h-full">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="h-full"
+          >
             <h2 className="text-4xl font-bold text-yellow-400  ">
               {anime.title.english || anime.title.native}
             </h2>
@@ -44,12 +53,20 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
             <div className="mt-3">
               <GenresTooltip anime={anime} />
             </div>
-          </div>
-          <div className=" flex justify-center items-center gap-3">
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.3 }}
+            className="flex justify-center items-center gap-3"
+          >
             <Text.Bold size="xl" className="md:hidden ">
               Add to favorites:{" "}
             </Text.Bold>
-            <button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
               <FaHeart
                 size={40}
                 onClick={() => {
@@ -59,16 +76,23 @@ export function DetailsBanner({ anime }: { anime: Anime }) {
                   favs.includes(anime.id) ? "text-red-500" : "text-white"
                 )}
               />
-            </button>
-          </div>
-          <div className=" min-w-[200px] md:min-w-[300px] md:scale-75 mx-auto">
-            <ChartRating
-              likes={anime.averageScore || 0}
-              dislikes={100 - (anime.averageScore || 0)}
-            />
-          </div>
+            </motion.button>
+          </motion.div>
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className=""
+          >
+            <div className="min-w-[200px] md:min-w-[300px] md:scale-90 scale-100 mx-auto">
+              <ChartRating
+                likes={anime.averageScore || 0}
+                dislikes={100 - (anime.averageScore || 0)}
+              />
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
