@@ -8,12 +8,13 @@ import { TriangleAlert } from "lucide-react";
 // Convert to server component by making it async
 export default async function SearchPage(props: any) {
   const client = createApolloClient();
-  const searchQuery = props.params.q || "";
+  const searchQuery = props.searchParams.q || "";
+  const parsedSearchQuery = decodeURIComponent(decodeURIComponent(searchQuery));
 
   const { data, error, loading } = await client.query({
     query: SEARCH_ANIMES_BY_TITLE,
     variables: {
-      search: decodeURIComponent(searchQuery),
+      search: parsedSearchQuery,
       page: 1,
       perPage: 50,
     },
