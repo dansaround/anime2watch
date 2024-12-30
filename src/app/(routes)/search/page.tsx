@@ -6,13 +6,9 @@ import ResultsList from "@/app/components/domains/search/ResultsList";
 import { TriangleAlert } from "lucide-react";
 
 // Convert to server component by making it async
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: { q: string };
-}) {
+export default async function SearchPage(props: any) {
   const client = createApolloClient();
-  const searchQuery = searchParams.q || "";
+  const searchQuery = props.params.q || "";
 
   const { data, error, loading } = await client.query({
     query: SEARCH_ANIMES_BY_TITLE,
