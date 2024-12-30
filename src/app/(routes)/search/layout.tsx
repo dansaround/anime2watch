@@ -14,11 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export async function generateMetadata({
-  params,
   searchParams,
 }: {
-  params: any;
-  searchParams: { q?: string };
+  searchParams: any;
 }): Promise<any> {
   // Get search query from params and decode it
   const query = searchParams?.q ? decodeURIComponent(searchParams.q) : "";
