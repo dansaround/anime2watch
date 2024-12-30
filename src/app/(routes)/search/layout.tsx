@@ -14,12 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: {
-  searchParams: any;
+  params: any;
 }): Promise<any> {
   // Get search query from params and decode it
-  const query = searchParams?.q ? decodeURIComponent(searchParams.q) : "";
+  const query = params?.q ? decodeURIComponent(params.q) : "";
 
   // If there's no query, return default metadata
   if (!query) {
