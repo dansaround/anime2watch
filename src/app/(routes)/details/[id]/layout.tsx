@@ -26,12 +26,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const client = createApolloClient();
 
-  const { data } = await client.query({
+  const { data, error } = await client.query({
     query: GET_ANIME_BY_ID,
     variables: {
       id: Number(params.id),
     },
   });
+
+  if (error) {
+    return {
+      title: "Animes2Watch | Error",
+      description: "Error fetching anime data",
+    };
+  }
 
   const anime: Anime = data.Media;
 
@@ -61,12 +68,16 @@ export default async function DetailLayout({
 }>) {
   const client = createApolloClient();
 
-  const { data } = await client.query({
+  const { data, error } = await client.query({
     query: GET_ANIME_BY_ID,
     variables: {
       id: Number(params.id),
     },
   });
+
+  if (error) {
+    return <div>Error fetching anime data</div>;
+  }
 
   const anime: Anime = data.Media;
 
@@ -81,7 +92,7 @@ export default async function DetailLayout({
           </Text>
         </span>
       </div>
-      {/* {children} */}
+      {children}
     </div>
   );
 }
