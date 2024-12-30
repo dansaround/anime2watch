@@ -5,6 +5,47 @@ import createApolloClient from "@/lib/apollo.client";
 import ResultsList from "@/app/components/domains/search/ResultsList";
 import { TriangleAlert } from "lucide-react";
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { q?: string }; // Define el tipo de los parámetros de consulta
+}): Promise<any> {
+  // Get search query from params and decode it
+  // const query = props?.searchParams.q
+  //   ? decodeURIComponent(decodeURIComponent(props.searchParams.q))
+  //   : "";
+
+  // If there's no query, return default metadata
+  // if (!query) {
+
+  // }
+
+  const a = searchParams?.q || "hesoyam";
+
+  return {
+    title: `${JSON.stringify(a)}`,
+    description: "Search anime and manga titles",
+    // ... rest of default metadata
+  };
+
+  // return {
+  //   title: `Anime2Watch Search - ${query}`,
+  //   openGraph: {
+  //     title: `Anime2Watch Search - ${query}`,
+  //     images: [
+  //       "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
+  //     ],
+  //   },
+  //   twitter: {
+  //     card: "summary_large_image",
+  //     title: `Anime2Watch Search - ${query}`,
+  //     images: [
+  //       "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
+  //     ],
+  //   },
+  // };
+}
+
 // Convert to server component by making it async
 export default async function SearchPage(props: any) {
   const client = createApolloClient();
