@@ -2,11 +2,7 @@ import createApolloClient from "@/lib/apollo.client";
 import { GET_ANIME_BY_ID } from "@/lib/queries";
 import { Anime } from "@/lib/types";
 import { gql } from "@apollo/client";
-import type {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  Metadata,
-} from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Text } from "@/app/components/Typography";
 const geistSans = Geist({
@@ -22,7 +18,7 @@ const geistMono = Geist_Mono({
 export async function generateMetadata({
   params,
 }: {
-  params: { id: number };
+  params: { id: string };
 }): Promise<Metadata> {
   const client = createApolloClient();
 
@@ -32,13 +28,6 @@ export async function generateMetadata({
       id: Number(params.id),
     },
   });
-
-  if (error) {
-    return {
-      title: "Animes2Watch | Error",
-      description: "Error fetching anime data",
-    };
-  }
 
   const anime: Anime = data.Media;
 
@@ -64,7 +53,7 @@ export default async function DetailLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { id: number };
+  params: { id: string };
 }>) {
   const client = createApolloClient();
 
