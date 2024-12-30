@@ -12,20 +12,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// export async function generateMetadata(): Promise<Metadata> {
-//   return {
-//     title: `Animes2Watch | Home`,
-//     description: "Home page of Animes2Watch",
-//     openGraph: {
-//       title: `Animes2Watch | Home`,
-//       description: "Home page of Animes2Watch",
-//       images: ["https://hackmd.io/_uploads/Skp5aoJ8kg.png"],
-//     },
-
-//     metadataBase: new URL("https://anime2watch.vercel.app"),
-//   };
-// }
-
 export const metadata: Metadata = {
   title: "Anime2Watch | Home",
   description: "The information you need of your favorite anime",
@@ -33,7 +19,7 @@ export const metadata: Metadata = {
     title: "Anime2Watch | Home",
     description: "The information you need of your favorite anime",
     images: [
-      "https://www.kinkohn.com/cdn/shop/files/DDD1.png?v=1719207896&width=493",
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
     ],
     url: "https://anime2watch.vercel.app/home",
     type: "website",
