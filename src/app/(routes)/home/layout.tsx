@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     url: "https://anime2watch.vercel.app/home",
     type: "website",
   },
-  metadataBase: new URL("https://anime2watch.vercel.app"),
 };
 
 export default function RootLayout({

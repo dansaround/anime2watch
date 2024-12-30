@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Anime2Watch",
+  title: "Anime2Watch | Favorites	",
   description: "The information you need of your favorite anime",
 };
 

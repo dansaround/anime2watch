@@ -23,6 +23,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "Anime2Watch | Login",
+  description: "The information you need of your favorite anime",
+  openGraph: {
+    title: "Anime2Watch | Login",
+    description: "The information you need of your favorite anime",
+    images: [
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx171018-2ldCj6QywuOa.jpg",
+    ],
+    url: "https://anime2watch.vercel.app/login",
+    type: "website",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
