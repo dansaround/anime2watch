@@ -9,12 +9,13 @@ import { FavCard } from "@/app/components/FavCard";
 import { toast, Toaster } from "sonner";
 import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useToast } from "@/hooks/useToast";
 
 export default function Favorites() {
   const { favs } = useFavorites();
 
   const { isSignedIn, user, isLoaded } = useUser();
-
+  const { notify } = useToast();
   const { data, loading, error } = useQuery<GetPaginatedRecentAnimesInterface>(
     GET_ANIMES_BY_IDS,
     {
@@ -26,17 +27,18 @@ export default function Favorites() {
   );
 
   useEffect(() => {
-    if (error !== undefined) {
-      toast.error("Ups, something went wrong", {
-        description: "Anilist server is down ): lease try again later",
+    if (error) {
+      notify({
+        type: "error",
+        message: "Ups, something went wrong",
+        description: "Anilist server is down  please try again later",
         action: {
-          label: "Close",
-          onClick: () => console.log("Closed error notification"),
+          label: "close",
+          onClick: () => console.log("useffecting from hook at details page"),
         },
       });
-      console.log("Error fetching data at favorites");
     }
-  }, []);
+  }, [error]);
 
   if (!favs.length) {
     return (

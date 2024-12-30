@@ -22,7 +22,7 @@ export default function SearchRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex w-full h-full flex-col bg-black pt-20 pb-8 px-20 overflow-x-hidden">
+    <div className="flex w-full h-full flex-col bg-black pt-4 pb-4 px-2  lg:pt-20 lg:pb-8 lg:px-20 overflow-x-hidden">
       {children}
     </div>
   );

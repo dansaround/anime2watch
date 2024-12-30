@@ -10,14 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import {
-  SignedIn,
-  SignedOut,
-  SignIn,
-  SignInButton,
-  SignUp,
-  SignUpButton,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignIn } from "@clerk/nextjs";
 import Image from "next/image";
 
 export default function StartPage() {
@@ -47,22 +40,25 @@ export default function StartPage() {
               </SignedOut>
             </CardHeader>
             <SignedOut>
-              <CardContent className="flex flex-col gap-1">
+              <CardContent className="flex flex-col gap-1 p-0">
                 <SignIn
                   forceRedirectUrl="/home"
                   appearance={{
                     elements: {
+                      baseTheme: "dark",
                       formButtonPrimary: {
                         fontSize: 14,
                         textTransform: "none",
-                        backgroundColor: "#35007b",
-                        "&:hover, &:focus, &:active": {
-                          backgroundColor: "#996ad7",
-                        },
+                      },
+                      cardBox: {
+                        width: "100%",
+                        maxWidth: "100%",
+                        marginTop: "1rem",
+                        marginBottom: "1rem",
                       },
                     },
                   }}
-                />{" "}
+                />
               </CardContent>
             </SignedOut>
 

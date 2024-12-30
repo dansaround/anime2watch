@@ -22,7 +22,7 @@ interface ResultProps {
 export default function ResultsList({ results, isLoading }: ResultsListProps) {
   return (
     <div className=" pb-2">
-      <ul className="flex items-center flex-wrap gap-6 mt-6">
+      <ul className="flex justify-evenly lg:justify-start  items-center flex-wrap gap-6 mt-6">
         {isLoading ? (
           Array.from({ length: 16 }).map((_, index) => (
             <SkeletonRectangle key={index} className="w-48 h-72 rounded-md" />
@@ -48,7 +48,7 @@ function ResultCard({ result, index }: ResultProps) {
 
   return (
     <motion.li
-      className="relative w-48 h-72 rounded-md shadow-md overflow-hidden "
+      className="relative lg:w-48 lg:h-72 w-40 h-64 rounded-md shadow-md overflow-hidden "
       initial={{ opacity: 0, y: 50 }} // Initial state: transparent and below
       animate={{ opacity: 1, y: 0 }} // Final state: visible and at position
       transition={{

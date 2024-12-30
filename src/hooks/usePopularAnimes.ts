@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { GET_PAGINATED_POPULAR_ANIMES } from "@/lib/queries";
 import { GetPaginatedPopularAnimesInterface } from "@/lib/types";
+import { useToast } from "./useToast";
 
 const PAGES_LIMIT = 3;
 
@@ -12,6 +13,7 @@ interface UsePopularAnimesProps {
 }
 
 export function usePopularAnimes({ perPage }: UsePopularAnimesProps) {
+  const { notify } = useToast();
   const [page, setPage] = useState(1); // Current page
   const [totalResults, setTotalResults] = useState<number | null>(null); // Store total results initially
 
@@ -32,6 +34,20 @@ export function usePopularAnimes({ perPage }: UsePopularAnimesProps) {
       setTotalResults(pageInfo.total);
     }
   }, [pageInfo?.total, totalResults]);
+
+  useEffect(() => {
+    if (error) {
+      notify({
+        type: "error",
+        message: "Ups, something went wrong",
+        description: "Anilist server is down  please try again later",
+        action: {
+          label: "close",
+          onClick: () => console.log("useffecting from hook at details page"),
+        },
+      });
+    }
+  }, [error]);
 
   // Calculate lastPage based on totalResults or current pageInfo
   const lastPage = Math.ceil((totalResults || pageInfo?.total || 0) / perPage);

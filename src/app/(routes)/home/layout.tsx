@@ -12,9 +12,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// export async function generateMetadata(): Promise<Metadata> {
+//   return {
+//     title: `Animes2Watch | Home`,
+//     description: "Home page of Animes2Watch",
+//     openGraph: {
+//       title: `Animes2Watch | Home`,
+//       description: "Home page of Animes2Watch",
+//       images: ["https://hackmd.io/_uploads/Skp5aoJ8kg.png"],
+//     },
+
+//     metadataBase: new URL("https://anime2watch.vercel.app"),
+//   };
+// }
+
 export const metadata: Metadata = {
-  title: "Anime2Watch",
+  title: "Anime2Watch | Search",
   description: "The information you need of your favorite anime",
+  openGraph: {
+    title: "Anime2Watch | Search",
+    description: "The information you need of your favorite anime",
+    images: ["https://hackmd.io/_uploads/Skp5aoJ8kg.png"],
+  },
+  metadataBase: new URL("https://anime2watch.vercel.app"),
 };
 
 export default function RootLayout({

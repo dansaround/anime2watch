@@ -65,10 +65,10 @@ export default function Header() {
             ? "bg-gradient-to-b from-black/60 to-transparent"
             : "bg-black"
         }`,
-        "flex justify-between h-16 items-center px-10  md:px-20 z-20"
+        " grid grid-cols-[1fr_3fr_100px] w-full h-16 items-center lg:px-10 px-4 z-20 "
       )}
     >
-      <div className="flex items-center gap-12 pr-2">
+      <div className="w-full flex items-center gap-12 pr-2">
         <Link href="/home">
           <Text.Bold size="xl" className={cn(`text-white text-xs md:text-lg`)}>
             Anime2Watch
@@ -86,7 +86,8 @@ export default function Header() {
           </ul>
         </nav>
       </div>
-      <div className="flex justify-end items-center gap-2 sm:gap-4">
+
+      <div className="flex justify-end items-center gap-2 sm:gap-4 w-full">
         <div className="flex justify-end gap-2 sm:gap-4 w-auto sm:w-64">
           {isSearching ? (
             <motion.div
@@ -134,16 +135,17 @@ export default function Header() {
             </button>
           )}
         </div>
-        <div className="flex items-center ">
-          <SignedOut>
-            <div className="flex items-center justify-center border border-zinc-300 rounded-full p-2">
-              <SignInButton />
-            </div>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </div>
+      </div>
+
+      <div className="flex items-center max-w-[100px] ml-auto">
+        <SignedOut>
+          <div className="lg:w-full flex items-center justify-center border border-zinc-300  rounded-md p-2">
+            <SignInButton />
+          </div>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </header>
   );

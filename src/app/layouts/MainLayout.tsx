@@ -12,6 +12,7 @@ import { HomeBanner } from "../components/Banners/HomeBanner";
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Sidebar } from "../components/domains/home/Sidebar";
+import { useToast } from "@/hooks/useToast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   const { loading, data, error } = useQuery(GET_HERO_SECTION_ANIMES);
-
+  const { notify } = useToast();
   const getHeroAnimes = () => {
     return loading
       ? []
@@ -50,15 +51,16 @@ export default function MainLayout({
 
   useEffect(() => {
     if (error) {
-      toast.error("Ups, something went wrong", {
-        description: "Anilist server is down ): lease try again later",
+      notify({
+        type: "error",
+        message: "Ups, something went wrong",
+        description: "Anilist server is down  please try again later",
         action: {
-          label: "Close",
-          onClick: () => console.log("Closed error notification"),
+          label: "close",
+          onClick: () => console.log("useffecting from hook at details page"),
         },
       });
     }
-    console.log("useffecting at search page");
   }, [error]);
 
   return (

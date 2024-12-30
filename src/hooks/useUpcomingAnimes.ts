@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { GET_PAGINATED_UPCOMING_ANIMES } from "@/lib/queries";
 import { GetPaginatedUpcomingAnimesInterface } from "@/lib/types";
+import { useToast } from "./useToast";
 
 const PAGES_LIMIT = 3;
 
@@ -14,7 +15,7 @@ interface UseUpcomingAnimesProps {
 export function useUpcomingAnimes({ perPage }: UseUpcomingAnimesProps) {
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState<number | null>(null);
-
+  const { notify } = useToast();
   const { loading, error, data } =
     useQuery<GetPaginatedUpcomingAnimesInterface>(
       GET_PAGINATED_UPCOMING_ANIMES,
@@ -31,6 +32,20 @@ export function useUpcomingAnimes({ perPage }: UseUpcomingAnimesProps) {
       setTotalResults(pageInfo.total);
     }
   }, [pageInfo?.total, totalResults]);
+
+  useEffect(() => {
+    if (error) {
+      notify({
+        type: "error",
+        message: "Ups, something went wrong",
+        description: "Anilist server is down  please try again later",
+        action: {
+          label: "close",
+          onClick: () => console.log("useffecting from hook at details page"),
+        },
+      });
+    }
+  }, [error]);
 
   const lastPage = Math.ceil((totalResults || pageInfo?.total || 0) / perPage);
 

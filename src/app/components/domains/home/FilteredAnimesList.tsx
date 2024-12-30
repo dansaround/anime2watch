@@ -20,19 +20,6 @@ export default function FilteredAnimesList() {
     pagesToRender,
   } = useFilteredAnimes({ perPage: 10 });
 
-  useEffect(() => {
-    if (error) {
-      toast.error("Ups, something went wrong", {
-        description: "Anilist server is down ): lease try again later",
-        action: {
-          label: "Close",
-          onClick: () => console.log("Closed error notification"),
-        },
-      });
-    }
-    console.log("useffecting at HomePage/filteredAnimeList page");
-  }, [error]);
-
   if (loading) {
     return <Text.Semibold>Loading...</Text.Semibold>;
   }

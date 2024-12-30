@@ -70,7 +70,7 @@ export function HomeBanner({
           >
             {anime.bannerImage ? (
               <Image
-                className="scale-125"
+                className="scale-110 lg:scale-125"
                 src={anime.bannerImage || anime.coverImage.extraLarge}
                 alt="Hero Image"
                 fill

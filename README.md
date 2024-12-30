@@ -50,7 +50,7 @@ This is a anime library project to showcase the usage of the following stack
 
 - [x] Implement Design System
 - [x] Add animations.
-- [ ] Add responsive
+- [x] Add responsive
 
 ### 7. SEO
 
@@ -61,7 +61,7 @@ This is a anime library project to showcase the usage of the following stack
 
 ### 8. Validations and Error handling
 
-- [ ] Validate user input and API response.
+- [x] Validate user input and API response.
 - [x] Loading feature and friendly error messages **mensajes informativos**.
 
 ### 9. Despliegue

@@ -9,10 +9,11 @@ import { Text } from "@/app/components/Typography";
 import { searchAtom } from "@/app/states/search-state";
 import { SEARCH_ANIMES_BY_TITLE } from "@/lib/queries";
 import ResultsList from "@/app/components/domains/search/ResultsList";
+import { useToast } from "@/hooks/useToast";
 
 export default function SearchPage() {
+  const { notify } = useToast();
   const [search, setSearch] = useAtom(searchAtom);
-
   // Function to extract and decode the search parameter from the URL
   const getSearchFromURL = () => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -38,21 +39,22 @@ export default function SearchPage() {
 
   useEffect(() => {
     if (error) {
-      toast.error("Ups, something went wrong", {
-        description: "Anilist server is down ): lease try again later",
+      notify({
+        type: "error",
+        message: "Ups, something went wrong",
+        description: "Anilist server is down  please try again later",
         action: {
-          label: "Close",
-          onClick: () => console.log("Closed error notification"),
+          label: "close",
+          onClick: () => console.log("useffecting from hook at details page"),
         },
       });
     }
-    console.log("useffecting at search page");
   }, [error]);
 
   return (
     <div className="w-full max-w-full h-full flex flex-col gap-4 relative">
       <Toaster position="top-center" richColors />
-      <Text.Bold size="4xl" className="text-yellow-400">
+      <Text.Bold size="4xl" className="text-yellow-400 lg:pl-0 pl-4">
         Top Results:
       </Text.Bold>
 
