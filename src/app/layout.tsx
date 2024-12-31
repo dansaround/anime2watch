@@ -4,6 +4,8 @@ import "./globals.css";
 import ApolloProvider from "@/app/utils/ApolloProvider";
 import { ThemeProvider } from "next-themes";
 import Header from "./components/Header";
+import { dark } from "@clerk/themes";
+
 import { Text } from "./components/Typography";
 import {
   ClerkProvider,
@@ -37,13 +39,19 @@ export const metadata: Metadata = {
   },
 };
 
+const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+      publishableKey={PUBLISHABLE_KEY}
+    >
       <html lang="en" suppressHydrationWarning>
         <ApolloProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
