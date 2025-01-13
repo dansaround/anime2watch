@@ -14,6 +14,8 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import Link from "next/link";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,10 +68,26 @@ export default function RootLayout({
                 {children}
               </main>
 
-              <footer className="h-full p-4 w-full flex justify-center bg-yellow-400">
-                <Text.Bold size="base" className="text-black">
-                  Made with ❤️ by Daniel Kcomt :D
-                </Text.Bold>
+              <footer className="h-full p-4 w-full flex justify-center bg-yellow-400 gap-3">
+                <div>
+                  <Text.Regular size="base" className="text-black">
+                    Made with ❤️
+                  </Text.Regular>
+                  <Text.Bold size="base" className="text-black">
+                    by Daniel Kcomt
+                  </Text.Bold>
+                </div>
+                <Link href={"https://github.com/dansaround"} target="_blank">
+                  <FaGithub size={20} color="black" />
+                </Link>
+                <Link
+                  href={
+                    "https://www.linkedin.com/in/daniel-kcomt-frontend-developer/"
+                  }
+                  target="_blank"
+                >
+                  <FaLinkedin size={20} color="black" />
+                </Link>
               </footer>
             </body>
           </ThemeProvider>
